@@ -41,4 +41,41 @@ class AuthService {
       );
     }
   }
+
+  Future<void> signin({
+    required String email,
+    required String password,
+    required BuildContext context
+  }) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+
+      await Future.delayed(const Duration(seconds: 1));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => const DashboardScreen()
+          )
+      );
+
+    } on FirebaseAuthException catch (e) {
+      String message = '';
+      if (e.code == 'user-not-found') {
+        message = 'No se encontro un usuario asociado al correo.';
+      } else if (e.code == 'wrong-password') {
+        message = 'Contrasena incorrecta.';
+      }
+      Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.SNACKBAR,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
+    }
+  }
 }
