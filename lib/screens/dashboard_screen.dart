@@ -55,31 +55,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       drawer: myDrawer(),
-      body: ListView.builder(
-        itemCount: 7,
-        itemBuilder: (BuildContext context, int index) {
-          return const Column(
-            children: [
-              ListTile(
-                leading: Icon(Icons.file_copy),
-                title: Text('Reporte'),
-                subtitle: Text('Reporte #'),
-                trailing: Icon(Icons.edit_note),
-              ),
-              Divider(
-                thickness: 0.5,
-                endIndent: 25,
-                indent: 25,
-              ),
-            ],
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: defaultColorScheme.primary,
-        onPressed: () {},
-        child: const Icon(Icons.add, color: Colors.white, size: 28),
-      ),
+      body: Container(child: Text("Hola Mundo"),)
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/services/auth_service.dart';
 
-import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -13,14 +13,16 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
-
     //  Controllers
     final txtUserController = TextEditingController();
     final txtpWDController = TextEditingController();
 
     //  Iniciar Sesion Metodo
-    void registerUser() {
-
+    void registerUser() async {
+      await AuthService().signup(
+          email: txtUserController.text,
+          password: txtpWDController.text,
+          context: context);
     }
 
     return Scaffold(
@@ -58,13 +60,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
 
             const SizedBox(
-              height: 75,
+              height: 50,
             ),
 
             //  SIGN IN BUTTON
-            MyButton(
-              onTap: registerUser, btnText: 'Registrar',
-            ),
+/*            MyButton(
+              onTap: registerUser,
+              btnText: 'Registrar',
+            ),*/
+
+            Padding(
+              padding: const EdgeInsets.all(25),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      minimumSize: const Size(double.infinity, 60),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12))),
+                  onPressed: () async {
+                    await AuthService().signup(
+                        email: txtUserController.text,
+                        password: txtpWDController.text,
+                        context: context);
+                  },
+                  child: const Text(
+                    "Registrar",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  )),
+            )
           ],
         ),
       ),
