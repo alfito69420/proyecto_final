@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../services/auth_service.dart';
 import 'login_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -98,10 +99,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onTap: () {
               /*print(
                   "Custom theme enabled (logout): ${GlobalValues.customThemeEnabled.value}");*/
-              Navigator.pushAndRemoveUntil(
+              /*Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  ModalRoute.withName("/login"));
+                  ModalRoute.withName("/login"));*/
+
+              AuthService().signout(context: context);
             },
             title: const Text("Cerrar Sesión"),
             //subtitle: const Text("Tema / Fuente"),
