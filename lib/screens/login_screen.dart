@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           //  SIGN IN BUTTON
           MyButton(
-            onTap: signInUser,
+            onTap: signInUser, btnText: 'Iniciar Sesion',
           ),
 
           const SizedBox(
@@ -100,17 +100,20 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
 
           //  REGISTER BUTTON
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('¿No está registrado?'),
-              SizedBox(
+              const Text('¿No está registrado?'),
+              const SizedBox(
                 width: 4,
               ),
-              Text(
-                'Registrece ahora',
-                style:
-                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+              GestureDetector.new(
+                onTap: () => Navigator.pushNamed(context, "/register"),
+                child: const Text(
+                  'Registrece ahora',
+                  style:
+                      TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                ),
               )
             ],
           )

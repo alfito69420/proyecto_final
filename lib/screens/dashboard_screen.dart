@@ -35,7 +35,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
         title: Text(
-          "APP Bomberos",
+          "Jaguar",
           style: TextStyle(color: defaultColorScheme.onPrimary),
         ),
         actions: [
@@ -92,8 +92,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 borderRadius: BorderRadius.circular(100),
                 //child: selectedImage != null ? Image.file(selectedImage!) : const Image(image: AssetImage("assets/pfp.jpg"))),
                 child: const Image(image: AssetImage("assets/pfp.jpg"))),
-            accountName: const Text("sun&moon"),
-            accountEmail: const Text("zenwol@gmail.com"),
+            accountName: const Text("Jaguar"),
+            accountEmail: const Text("jaguar@gmail.com"),
           ),
           ListTile(
             onTap: () {

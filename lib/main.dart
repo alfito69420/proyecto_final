@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_final/firebase_options.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
+import 'package:proyecto_final/screens/register_screen.dart';
 
 void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/login": (context) => const LoginScreen(),
         "/home": (context) => const DashboardScreen(),
-
+        "/register": (context) => const RegisterScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
