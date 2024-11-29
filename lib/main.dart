@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/firebase_options.dart';
+import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
+import 'package:proyecto_final/screens/onboarding/onboarding_screen.dart';
 import 'package:proyecto_final/screens/register_screen.dart';
 
 void main() async {
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App Bomberos',
-      home: const LoginScreen(),
+      home:  OnboardingScreen(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
         "/login": (context) => const LoginScreen(),
         "/home": (context) => const DashboardScreen(),
         "/register": (context) => const RegisterScreen(),
+        "/onboarding": (context) => const OnboardingScreen(),
+        "/jaguarhome": (context) => JaguarHomeScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

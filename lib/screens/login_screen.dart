@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (email.isEmpty || password.isEmpty) {
         Fluttertoast.showToast(
-          msg: 'Por favor complete todos los campos.',
+          msg: 'Por favor, complete todos los campos.',
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.black54,
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (!isValidEmail(email)) {
         Fluttertoast.showToast(
-          msg: 'Por favor ingrese un correo válido.',
+          msg: 'Por favor, ingrese un correo válido.',
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.black54,
@@ -169,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 GestureDetector.new(
                   onTap: () => Navigator.pushNamed(context, "/register"),
                   child: const Text(
-                    'Registrece ahora',
+                    'Regístrese ahora',
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold),
                   ),
