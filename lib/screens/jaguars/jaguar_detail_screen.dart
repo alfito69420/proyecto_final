@@ -68,8 +68,9 @@ class JaguarDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 24),
-                  _buildAdoptButton(context),
+                  // Solo si no ha sido adoptado o liberado, puede adoptarse
+                  if(jaguar.status == 'Disponible') SizedBox(height: 24),
+                  if(jaguar.status == 'Disponible') _buildAdoptButton(context),
                 ],
               ),
             ),
@@ -90,6 +91,11 @@ class JaguarDetailScreen extends StatelessWidget {
           children: [
             _buildInfoItem(Icons.cake, '${jaguar.age} años'),
             _buildInfoItem(jaguar.sex == 'Macho' ? Icons.male : Icons.female, jaguar.sex),
+            _buildInfoItem(
+              jaguar.status == 'Liberado' || jaguar.status == 'Adoptado'
+              ? Icons.done 
+              : Icons.pending, jaguar.status
+            ),
           ],
         ),
       ),
