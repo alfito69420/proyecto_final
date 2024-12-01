@@ -1,6 +1,5 @@
 // lib/screens/jaguar_detail_screen.dart
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/jaguar.dart';
 
 class JaguarDetailScreen extends StatelessWidget {
@@ -19,20 +18,7 @@ class JaguarDetailScreen extends StatelessWidget {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(jaguar.name,
-                  style: GoogleFonts.oswald(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 10.0,
-                          color: Colors.black,
-                          offset: Offset(5.0, 5.0),
-                        ),
-                      ],
-                    ),
-                  )),
+                  ),
               background: Hero(
                 tag: 'jaguar-${jaguar.name}',
                 child: Image.asset(
@@ -52,21 +38,10 @@ class JaguarDetailScreen extends StatelessWidget {
                   const SizedBox(height: 24),
                   Text(
                     'Descripción',
-                    style: GoogleFonts.oswald(
-                      textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.orange[800],
-                      ),
-                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     jaguar.description,
-                    style: GoogleFonts.roboto(
-                      textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        height: 1.5,
-                      ),
-                    ),
                   ),
                   const SizedBox(height: 24),
                   _buildAdoptButton(context),
@@ -103,12 +78,6 @@ class JaguarDetailScreen extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           text,
-          style: GoogleFonts.roboto(
-            textStyle: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
         ),
       ],
     );
@@ -123,10 +92,6 @@ class JaguarDetailScreen extends StatelessWidget {
           backgroundColor: Colors.orange[800],
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: GoogleFonts.oswald(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),

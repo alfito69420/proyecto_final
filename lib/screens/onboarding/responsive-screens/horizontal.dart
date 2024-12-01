@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/screens/onboarding/content_model.dart';
 
 class Horizontal extends StatefulWidget {
@@ -49,11 +48,6 @@ class _HorizontalState extends State<Horizontal> {
               children: [
                 Text(
                   widget.content.title!,
-                  style: GoogleFonts.getFont(
-                    widget.currentFont != null ? widget.currentFont! : 'Roboto',
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
                 widget.index != null && widget.index == 2 ?
                 Column(
@@ -100,10 +94,7 @@ class _HorizontalState extends State<Horizontal> {
         ),
         SizedBox(height: 3),
         Text(
-          text,
-          style: GoogleFonts.getFont(
-            widget.currentFont != null ? widget.currentFont! : 'Roboto',
-          ), // Aplicar fuente de muestra
+          text, // Aplicar fuente de muestra
         ),
         SizedBox(height: 10),
       ],

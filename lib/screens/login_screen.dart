@@ -215,7 +215,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     imagePath: 'assets/google.webp'),
                 const SizedBox(width: 25),
                 // github button
-                SquareTile(onTap: () {}, imagePath: 'assets/github.png'),
+                SquareTile(
+                    onTap: () => AuthService().githubLogin(context),
+                    imagePath: 'assets/github.png'),
                 const SizedBox(width: 25),
                 //  facebook button
                 SquareTile(onTap: () {}, imagePath: 'assets/fb.webp')

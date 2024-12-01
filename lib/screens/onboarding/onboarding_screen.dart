@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/screens/onboarding/content_model.dart';
 import 'package:proyecto_final/screens/onboarding/responsive-screens/horizontal.dart';
 import 'package:proyecto_final/screens/onboarding/responsive-screens/vertical.dart';
@@ -98,9 +97,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 child: Text(
                     currentIndex == contents.length - 1 ? 'Continue' : 'Next',
-                    style: GoogleFonts.getFont(
-                      'Oswald',
-                    )
                 ),
               ),
             ),
