@@ -9,6 +9,9 @@ import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
 import 'package:proyecto_final/screens/onboarding_screen.dart';
+import 'package:proyecto_final/screens/pagos/payment_info_screen.dart';
+import 'package:proyecto_final/screens/pagos/plan_details_screen.dart';
+import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
 import 'package:proyecto_final/screens/services/preference_service.dart';
 
 void main() async {
@@ -34,10 +37,6 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Jaguares en la Selva',
             home: OnboardingScreen(),
-            // theme: ThemeData(
-            //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.green[900]!),
-            //   useMaterial3: true,
-            // ),
             theme: providerVars.currentTheme,
             routes: {
               "/login": (context) => const LoginScreen(),
@@ -48,6 +47,7 @@ class MyApp extends StatelessWidget {
               "/us": (context) => TeamScreen(),
               "/locationmap": (context) => MapLocation(),
               "/themes": (context) => ThemeScreen(),
+              "/planselect": (context) => PlanSelectionScreen(),
             },
             debugShowCheckedModeBanner: false,
           );

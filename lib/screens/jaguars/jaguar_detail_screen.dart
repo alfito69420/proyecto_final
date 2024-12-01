@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
 
 class JaguarDetailScreen extends StatelessWidget {
   final Jaguar jaguar;
@@ -19,20 +20,19 @@ class JaguarDetailScreen extends StatelessWidget {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(jaguar.name,
-                  style: GoogleFonts.oswald(
-                    textStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 10.0,
-                          color: Colors.black,
-                          offset: Offset(5.0, 5.0),
-                        ),
-                      ],
-                    ),
-                  )),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 10.0,
+                        color: Colors.black,
+                        offset: Offset(5.0, 5.0),
+                      ),
+                    ],
+                  ),
+                ),
               background: Hero(
                 tag: 'jaguar-${jaguar.name}',
                 child: Image.asset(
@@ -129,7 +129,7 @@ class JaguarDetailScreen extends StatelessWidget {
           backgroundColor: Colors.orange[800],
           foregroundColor: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: GoogleFonts.oswald(
+          textStyle: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -138,10 +138,13 @@ class JaguarDetailScreen extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          // Aquí puedes agregar la lógica para el proceso de adopción
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('¡Gracias por querer adoptar a ${jaguar.name}!')),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PlanSelectionScreen()),
           );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   SnackBar(content: Text('¡Gracias por querer adoptar a ${jaguar.name}!')),
+          // );
         },
       ),
     );
