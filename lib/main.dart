@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
+import 'package:proyecto_final/screens/home_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
@@ -16,14 +17,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App Bomberos',
-      home: JaguarHomeScreen(),
+      home: OnboardingScreen(),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green[900]!),
         useMaterial3: true,
       ),
       routes: {
         "/login": (context) => const LoginScreen(),
         "/home": (context) => const DashboardScreen(),
+        "/newhome": (context) => HomeScreen(),
         "/onboarding": (context) => const OnboardingScreen(),
         "/jaguarhome": (context) => JaguarHomeScreen(),
         "/us": (context) => TeamScreen(),

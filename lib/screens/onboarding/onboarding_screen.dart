@@ -88,7 +88,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 onPressed: () {
                   if (currentIndex == contents.length - 1) {
-                    Navigator.pushNamed(context, "/jaguarhome");
+                    Navigator.pushNamed(context, "/newhome");
                   }
                   _controller.nextPage(
                     duration: Duration(milliseconds: 100),
