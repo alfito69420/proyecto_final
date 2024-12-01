@@ -16,7 +16,6 @@ class VerticalHome extends StatelessWidget {
             margin: const EdgeInsets.all(12), // Margen alrededor de la imagen
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20), // Bordes redondeados
-              
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100), // Asegura bordes redondeados

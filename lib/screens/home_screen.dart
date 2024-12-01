@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:proyecto_final/models/caroussel_item.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
+import 'package:proyecto_final/screens/general/theme_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/responsives/home/horizontal_home.dart';
 import 'package:proyecto_final/screens/responsives/home/vertical_home.dart';
@@ -108,11 +109,31 @@ class HomeScreen extends StatelessWidget {
                     HorizontalHome()
                     :
                     VerticalHome(),
+                    customThemeBtn(context)
                   ],
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget customThemeBtn(BuildContext context){
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ThemeScreen()),
+        );
+      },
+      child: Text('Temas'),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.orange[800],
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
     );
