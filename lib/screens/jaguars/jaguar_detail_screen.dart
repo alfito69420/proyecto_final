@@ -6,7 +6,7 @@ import 'package:proyecto_final/models/jaguar.dart';
 class JaguarDetailScreen extends StatelessWidget {
   final Jaguar jaguar;
 
-  const JaguarDetailScreen({Key? key, required this.jaguar}) : super(key: key);
+  const JaguarDetailScreen({super.key, required this.jaguar});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class JaguarDetailScreen extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               title: Text(jaguar.name,
                   style: GoogleFonts.oswald(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 22.0,
                       fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class JaguarDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildInfoCard(),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   Text(
                     'Descripción',
                     style: GoogleFonts.oswald(
@@ -59,7 +59,7 @@ class JaguarDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     jaguar.description,
                     style: GoogleFonts.roboto(
@@ -68,7 +68,7 @@ class JaguarDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   _buildAdoptButton(context),
                 ],
               ),
@@ -100,11 +100,11 @@ class JaguarDetailScreen extends StatelessWidget {
     return Column(
       children: [
         Icon(icon, size: 30, color: Colors.orange[800]),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           text,
           style: GoogleFonts.roboto(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
@@ -117,12 +117,12 @@ class JaguarDetailScreen extends StatelessWidget {
   Widget _buildAdoptButton(BuildContext context) {
     return Center(
       child: ElevatedButton.icon(
-        icon: Icon(Icons.pets),
+        icon: const Icon(Icons.pets),
         label: Text('Adoptar a ${jaguar.name}'),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.orange[800],
           foregroundColor: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: GoogleFonts.oswald(
             fontSize: 18,
             fontWeight: FontWeight.bold,

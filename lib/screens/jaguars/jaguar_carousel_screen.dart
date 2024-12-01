@@ -7,10 +7,10 @@ class JaguarCarouselScreen extends StatelessWidget {
   final Function(Jaguar) onJaguarTap;
 
   const JaguarCarouselScreen({
-    Key? key,
+    super.key,
     required this.jaguars,
     required this.onJaguarTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class JaguarCarouselScreen extends StatelessWidget {
               onTap: () => onJaguarTap(jaguar),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(
                   color: Colors.amber,
                   borderRadius: BorderRadius.circular(8.0),
@@ -55,10 +55,10 @@ class JaguarCarouselScreen extends StatelessWidget {
                             colors: [Colors.black.withOpacity(0.8), Colors.transparent],
                           ),
                         ),
-                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         child: Text(
                           jaguar.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,

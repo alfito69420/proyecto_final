@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
+import 'jaguars/jaguar_home_screen.dart';
 import 'login_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -56,7 +57,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       drawer: myDrawer(),
-      body: Container(child: Text("Hola Mundo"),)
+      body: Builder(builder: (context) => JaguarHomeScreen(),)
     );
   }
 

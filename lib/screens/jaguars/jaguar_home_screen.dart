@@ -35,14 +35,14 @@ class JaguarHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jaguares'),
+        title: const Text('Jaguares'),
       ),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
             child: Column(
               children: [
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Text(
                   '¡Jaguares Liberados!',
                   textAlign: TextAlign.start,
@@ -52,7 +52,7 @@ class JaguarHomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold
                   )
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 JaguarCarouselScreen(
                   jaguars: jaguars,
                   onJaguarTap: (jaguar) {
@@ -70,7 +70,7 @@ class JaguarHomeScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Text(
                   'Jaguares para Adoptar',
                   style: GoogleFonts.getFont(
@@ -79,14 +79,14 @@ class JaguarHomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold
                   )
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
               ],
             ),
           ),
           SliverPadding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 childAspectRatio: 0.7,
                 crossAxisSpacing: 10,
