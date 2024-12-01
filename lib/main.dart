@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_final/provider/provider_vars.dart';
 import 'package:proyecto_final/screens/general/map_screen.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
+import 'package:proyecto_final/screens/general/theme_screen.dart';
 import 'package:proyecto_final/screens/home_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
@@ -16,23 +19,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'App Bomberos',
-      home: OnboardingScreen(),
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green[900]!),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (context) => ProviderVars(),
+      child: Consumer<ProviderVars>(
+        builder: (context, providerVars, child) {
+          return MaterialApp(
+            title: 'App Bomberos',
+            home: OnboardingScreen(),
+            // theme: ThemeData(
+            //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.green[900]!),
+            //   useMaterial3: true,
+            // ),
+            theme: providerVars.currentTheme,
+            routes: {
+              "/login": (context) => const LoginScreen(),
+              "/home": (context) => const DashboardScreen(),
+              "/newhome": (context) => HomeScreen(),
+              "/onboarding": (context) => const OnboardingScreen(),
+              "/jaguarhome": (context) => JaguarHomeScreen(),
+              "/us": (context) => TeamScreen(),
+              "/locationmap": (context) => MapLocation(),
+              "/themes": (context) => ThemeScreen(),
+            },
+            debugShowCheckedModeBanner: false,
+          );
+        }
       ),
-      routes: {
-        "/login": (context) => const LoginScreen(),
-        "/home": (context) => const DashboardScreen(),
-        "/newhome": (context) => HomeScreen(),
-        "/onboarding": (context) => const OnboardingScreen(),
-        "/jaguarhome": (context) => JaguarHomeScreen(),
-        "/us": (context) => TeamScreen(),
-        "/locationmap": (context) => MapLocation(),
-      },
-      debugShowCheckedModeBanner: false,
     );
   }
 }
