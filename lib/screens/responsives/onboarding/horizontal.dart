@@ -55,11 +55,13 @@ class _HorizontalState extends State<Horizontal> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(height: 15),
                 widget.index != null && widget.index == 2 ?
-                Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                       numberCounter('1', 'Jaguar silvestre nacido'),
-                      numberCounter('5', 'Jaguares rehabilitados y liberados en selvas seguras'),
+                      numberCounter('5', 'Jaguares liberados en selvas seguras'),
                       numberCounter('11', 'Jaguares en proceso de rehabilitación'),
                   ],
                 )
@@ -67,7 +69,11 @@ class _HorizontalState extends State<Horizontal> {
                 Text(
                   widget.content.description!,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  style: GoogleFonts.getFont(
+                    widget.currentFont != null ? widget.currentFont! : 'Roboto',
+                    fontSize: 16,
+                    //color: Colors.grey
+                  ),
                 )
               ]
             ),
@@ -77,37 +83,47 @@ class _HorizontalState extends State<Horizontal> {
     );
   }
 
-  Widget numberCounter(number, text) {
-    return Column(
-      children: [
-        IntrinsicWidth(
-          child: Container(
-            color: Theme.of(context).primaryColor,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              child: Center(
-                child: Text(
-                  '${number}',
-                  style: TextStyle(
-                    fontSize: 32,
-                    //color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+  Widget numberCounter(String number, String text) {
+  return Column(
+    children: [
+      IntrinsicHeight(
+        child: Container(
+          color: Theme.of(context).primaryColor,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: Center(
+              child: Text(
+                '$number',
+                style: TextStyle(
+                  fontSize: 32,
+                  color: Theme.of(context).canvasColor,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ),
         ),
-        SizedBox(height: 3),
-        Text(
-          text,
-          style: GoogleFonts.getFont(
-            widget.currentFont != null ? widget.currentFont! : 'Roboto',
-          ), // Aplicar fuente de muestra
+      ),
+      const SizedBox(height: 3),
+      Container(
+        width: 120, // Asigna un ancho específico al contenedor
+        child: Center(
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.getFont(
+              widget.currentFont != null ? widget.currentFont! : 'Roboto',
+            ),
+            softWrap: true, // Permite el ajuste automático al renglón siguiente
+            overflow: TextOverflow.clip, // El texto se corta dentro de los límites
+          ),
         ),
-        SizedBox(height: 10),
-      ],
-    );
-  }
+      ),
+      const SizedBox(height: 10),
+    ],
+  );
+}
+
+
 
 }

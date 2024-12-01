@@ -4,11 +4,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:proyecto_final/models/caroussel_item.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
+import 'package:proyecto_final/screens/responsives/home/horizontal_home.dart';
+import 'package:proyecto_final/screens/responsives/home/vertical_home.dart';
 
 class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -100,77 +104,10 @@ class HomeScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 24),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Image.asset(
-                              'assets/general/intro_jaguars.png',
-                              fit: BoxFit.cover,
-                              height: 300,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 16),
-                        Expanded(
-                          flex: 1,
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Trabajando por el futuro del Jaguar',
-                                    style: GoogleFonts.oswald(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.orange[800],
-                                    ),
-                                  ),
-                                  SizedBox(height: 12),
-                                  Text(
-                                    'Somos una asociación comprometida con el desarrollo e implementación de '
-                                    'nuevos métodos que ayudan a dejar la huella del jaguar en la selva, al '
-                                    'contribuir en la reincorporación a su hábitat natural, queremos ver cada '
-                                    'vez más Jaguares en la Selva.',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 14,
-                                      color: Colors.grey[800],
-                                      height: 1.5,
-                                    ),
-                                  ),
-                                  SizedBox(height: 16),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => TeamScreen()),
-                                      );
-                                    },
-                                    child: Text('Conoce a nuestro equipo'),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.orange[800],
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    currentWidth > 600 ?
+                    HorizontalHome()
+                    :
+                    VerticalHome(),
                   ],
                 ),
               ),

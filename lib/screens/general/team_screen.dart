@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:proyecto_final/screens/general/map_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class TeamScreen extends StatelessWidget {
@@ -10,7 +12,7 @@ class TeamScreen extends StatelessWidget {
       backgroundColor: Colors.green[900], // Fondo verde oscuro
       body: CustomScrollView(
         slivers: <Widget>[
-          _buildSliverAppBar(),
+          _buildSliverAppBar(context),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
@@ -33,7 +35,9 @@ class TeamScreen extends StatelessWidget {
                       SizedBox(height: 20),
                       _buildAnimatedSection('Nuestro Equipo', _buildTeamContent()),
                       SizedBox(height: 20),
-                      _buildContactSection(),
+                      _buildVisitButton(context),
+                      SizedBox(height: 20),
+                      _buildContactSection(context),
                     ],
                   ),
                 ),
@@ -45,7 +49,7 @@ class TeamScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSliverAppBar() {
+  Widget _buildSliverAppBar(BuildContext context) {
     return SliverAppBar(
       expandedHeight: 200.0,
       floating: false,
@@ -56,7 +60,7 @@ class TeamScreen extends StatelessWidget {
           'Fundación Jaguares en la Selva',
           style: GoogleFonts.oswald(
             textStyle: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).canvasColor,
               fontSize: 16.0,
               shadows: [
                 Shadow(
@@ -221,7 +225,31 @@ class TeamScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContactSection() {
+  Widget _buildVisitButton(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MapLocation()),
+            );
+          },
+          child: Text('¡Visítanos aquí!'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.orange[800],
+            foregroundColor: Theme.of(context).canvasColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildContactSection(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -250,15 +278,15 @@ class TeamScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 12),
-          _buildContactInfo(FontAwesomeIcons.instagram, '@panterinha_jwf', 'https://www.instagram.com/jaguarsintothewild/'),
-          _buildContactInfo(FontAwesomeIcons.squareFacebook, 'Jaguares en la Selva', 'https://www.facebook.com/jaguarsintothewild?ref=ts&fref=ts'),
-          _buildContactInfo(FontAwesomeIcons.squareYoutube, 'Jaguars Into The Wild Foundation', 'https://www.youtube.com/channel/UCiQ7b_-eDiRjHSJI9W6LAGw'),
+          _buildContactInfo(FontAwesomeIcons.instagram, '@panterinha_jwf', 'https://www.instagram.com/jaguarsintothewild/', context),
+          _buildContactInfo(FontAwesomeIcons.squareFacebook, 'Jaguares en la Selva', 'https://www.facebook.com/jaguarsintothewild?ref=ts&fref=ts', context),
+          _buildContactInfo(FontAwesomeIcons.squareYoutube, 'Jaguars Into The Wild Foundation', 'https://www.youtube.com/channel/UCiQ7b_-eDiRjHSJI9W6LAGw', context),
         ],
       ),
     );
   }
 
-  Widget _buildContactInfo(IconData icon, String text, String url) {
+  Widget _buildContactInfo(IconData icon, String text, String url, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: GestureDetector(
@@ -271,7 +299,7 @@ class TeamScreen extends StatelessWidget {
                 color: Colors.orange[800],
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: FaIcon(icon, color: Colors.white, size: 20),
+              child: FaIcon(icon, color: Theme.of(context).canvasColor, size: 20),
             ),
             SizedBox(width: 12),
             Expanded(
@@ -292,10 +320,14 @@ class TeamScreen extends StatelessWidget {
   }
 
   void _launchURL(String url) async {
-    if (await canLaunchUrlString(url)) {
-      await launchUrlString(url);
-    } else {
-      throw 'No se pudo abrir la URL: $url';
+    Uri _url = Uri.parse(url);
+    // if (await canLaunchUrl(_url)) {
+    //   await launchUrl(_url);
+    // } else {
+    //   throw 'No se pudo abrir la URL: $_url';
+    // }
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 }

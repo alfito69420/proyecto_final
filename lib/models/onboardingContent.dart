@@ -16,12 +16,10 @@ List<OnboardingContent> contents = [
   ),
   OnboardingContent(
     image: "assets/onboarding/jaguar2.png",
-    title: "Nosotros",
-    description: "Somos una organización sin fines de lucro con el objetivo de "
-    "enseñar a diversas especies de félidos a regresar a su hábitat.\n\n"
-    "Nuestra fundación realiza actividades en las instalaciones del Santuario "
-    "del Jaguar Yaguar Xoo, un espacio abierto en el año 2000 originalmente para cuidar "
-    "animales silvestres decomisados."
+    title: "El Poder que se Desvanece",
+    description: 'A principios del siglo XX habitaban en México cerca de 40,000 jaguares '
+    'en vida libre, hoy quedan menos de 4,000, su población ha disminuído drásticamente '
+    'a lo largo de los años así como su distribución histórica que hoy en día es 40% menor.'
   ),
   OnboardingContent(
     image: "assets/onboarding/jaguar3.png",

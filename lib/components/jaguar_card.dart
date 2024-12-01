@@ -29,7 +29,7 @@ class JaguarCard extends StatelessWidget {
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-                child: Image.network(
+                child: Image.asset(
                   jaguar.imageUrl,
                   fit: BoxFit.cover,
                   width: double.infinity,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/screens/general/map_screen.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
 import 'package:proyecto_final/screens/home_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
-import 'package:proyecto_final/screens/onboarding/onboarding_screen.dart';
+import 'package:proyecto_final/screens/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         "/onboarding": (context) => const OnboardingScreen(),
         "/jaguarhome": (context) => JaguarHomeScreen(),
         "/us": (context) => TeamScreen(),
+        "/locationmap": (context) => MapLocation(),
       },
       debugShowCheckedModeBanner: false,
     );

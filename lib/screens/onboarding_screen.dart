@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/onboardingContent.dart';
-import 'package:proyecto_final/screens/onboarding/responsive-screens/horizontal.dart';
-import 'package:proyecto_final/screens/onboarding/responsive-screens/vertical.dart';
+import 'package:proyecto_final/screens/responsives/onboarding/horizontal.dart';
+import 'package:proyecto_final/screens/responsives/onboarding/vertical.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -52,13 +52,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     return Vertical(
                       content: contents[i], 
                       index: currentIndex,
-                      currentFont: 'Oswald',
+                      currentFont: 'Roboto',
                     );
                   } else {
                     return Horizontal(
                       content: contents[i],
                       index: currentIndex,
-                      currentFont: 'Oswald',
+                      currentFont: 'Roboto',
                     );
                   }
                 }
@@ -81,9 +81,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               width: double.infinity,
               child: TextButton(
                 child: Text(
-                    currentIndex == contents.length - 1 ? 'Continue' : 'Next',
+                    currentIndex == contents.length - 1 ? 'Continuar' : 'Siguiente',
                     style: GoogleFonts.getFont(
-                      'Oswald',
+                      'Roboto',
                     )
                 ),
                 onPressed: () {
