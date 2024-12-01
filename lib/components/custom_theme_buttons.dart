@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_final/components/colors_slider.dart';
 import 'package:proyecto_final/provider/provider_vars.dart';
+import 'package:proyecto_final/screens/services/preference_service.dart';
 import 'package:proyecto_final/settings/theme_settings.dart';
 import 'package:quickalert/quickalert.dart';
 
@@ -35,6 +36,7 @@ class _CustomThemeButtonsState extends State<CustomThemeButtons> {
 
   @override
   Widget build(BuildContext context) {
+    PreferenceService _preferenceService = PreferenceService();
     ProviderVars providerVars = Provider.of<ProviderVars>(context);
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
@@ -72,10 +74,11 @@ class _CustomThemeButtonsState extends State<CustomThemeButtons> {
                 Container(
                   width: currentWidth * .4,
                   child: TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // providerVars.flagDarkTheme = false;
                       // providerVars.flagCustomTheme = 0;
                       providerVars.currentTheme = ThemeSettings.lightTheme();
+                      await _preferenceService.saveTheme(providerVars.currentTheme, 'Roboto', false, false);
                       widget.resetColors();
                     },
                     child: Icon(Icons.light_mode),
@@ -95,10 +98,11 @@ class _CustomThemeButtonsState extends State<CustomThemeButtons> {
                 Container(
                   width: currentWidth * .4,
                   child: TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // providerVars.flagDarkTheme = true;
                       // providerVars.flagCustomTheme = 0;
                       providerVars.currentTheme = ThemeSettings.darkTheme();
+                      await _preferenceService.saveTheme(providerVars.currentTheme, 'Roboto', true, false);
                       widget.resetColors();
                     },
                     child: Icon(Icons.dark_mode),
@@ -153,7 +157,7 @@ class _CustomThemeButtonsState extends State<CustomThemeButtons> {
                     Container(
                       width: currentWidth * .3,
                       child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if(widget.currentBgColor != null || widget.currentPrColor != null || widget.currentFont != 'Roboto'){
                             // print('Fuente actual $widget.currentFont');
                             // providerVars.flagCustomTheme++;
@@ -164,9 +168,10 @@ class _CustomThemeButtonsState extends State<CustomThemeButtons> {
                               fontFamily: widget.currentFont ?? 'Roboto', // Ajusta según sea necesario
                               baseTheme: ThemeSettings.darkTheme()
                             );
+                            await _preferenceService.saveTheme(providerVars.currentTheme, widget.currentFont ?? 'Roboto', false, true);
                             // providerVars.customPrimaryColor = Theme.of(context).primaryColor;
                             // providerVars.customScaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
-                            // providerVars.customFontFamily = widget.currentFont != null ? widget.currentFont! : 'Roboto';
+                            providerVars.customFontFamily = widget.currentFont ?? 'Roboto';
                             QuickAlert.show(
                               context: context,
                               type: QuickAlertType.success,

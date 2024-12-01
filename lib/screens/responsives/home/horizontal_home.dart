@@ -36,21 +36,20 @@ class HorizontalHome extends StatelessWidget {
                 children: [
                   Text(
                     'Trabajando por el futuro del Jaguar',
-                    style: GoogleFonts.oswald(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.orange[800],
                     ),
                   ),
                   SizedBox(height: 12),
-                  Text(
+                  const Text(
                     'Somos una asociación comprometida con el desarrollo e implementación de '
                     'nuevos métodos que ayudan a dejar la huella del jaguar en la selva, al '
                     'contribuir en la reincorporación a su hábitat natural, queremos ver cada '
                     'vez más Jaguares en la Selva.',
-                    style: GoogleFonts.roboto(
+                    style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey[800],
                       height: 1.5,
                     ),
                   ),

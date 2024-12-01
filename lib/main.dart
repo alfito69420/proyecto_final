@@ -9,22 +9,30 @@ import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
 import 'package:proyecto_final/screens/onboarding_screen.dart';
+import 'package:proyecto_final/screens/services/preference_service.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final PreferenceService _preferenceService = PreferenceService();
+  // Cargar el tema guardado
+  final ThemeData loadedTheme = await _preferenceService.loadTheme();
+
+  runApp(MyApp(initialTheme: loadedTheme));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeData initialTheme;
+
+  const MyApp({super.key, required this.initialTheme});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ProviderVars(),
+      create: (context) => ProviderVars(initialTheme),
       child: Consumer<ProviderVars>(
         builder: (context, providerVars, child) {
           return MaterialApp(
-            title: 'App Bomberos',
+            title: 'Jaguares en la Selva',
             home: OnboardingScreen(),
             // theme: ThemeData(
             //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.green[900]!),

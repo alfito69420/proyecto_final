@@ -8,10 +8,9 @@ class ProviderVars extends ChangeNotifier{
   Color? _customPrimaryColor = null;
   Color? _customScaffoldBackgroundColor = null;
   String? _customFontFamily = null;
-  ThemeData _currentTheme = ThemeData(
-    colorScheme: ColorScheme.fromSeed(seedColor: Colors.green[900]!),
-    useMaterial3: true,
-  );
+  ThemeData _currentTheme;
+
+  ProviderVars(this._currentTheme);
 
   // Getters
   String get name => _name;

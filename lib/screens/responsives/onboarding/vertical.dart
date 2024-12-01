@@ -96,7 +96,7 @@ class _VerticalState extends State<Vertical> {
                   '${number}',
                   style: TextStyle(
                     fontSize: 26,
-                    color: Theme.of(context).canvasColor,
+                    // color: Theme.of(context).canvasColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

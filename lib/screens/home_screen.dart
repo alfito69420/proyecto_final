@@ -7,6 +7,7 @@ import 'package:proyecto_final/screens/general/theme_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/responsives/home/horizontal_home.dart';
 import 'package:proyecto_final/screens/responsives/home/vertical_home.dart';
+import 'package:proyecto_final/settings/theme_settings.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -47,14 +48,17 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              item.title!,
-                              style: GoogleFonts.playfairDisplay(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                item.title!,
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
                             ),
                             SizedBox(height: 20),
                             ElevatedButton(
@@ -69,7 +73,6 @@ class HomeScreen extends StatelessWidget {
                                 backgroundColor: Colors.orange[800],
                                 foregroundColor: Colors.white,
                                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                                textStyle: GoogleFonts.roboto(fontSize: 18),
                               ),
                             ),
                           ],
@@ -85,7 +88,8 @@ class HomeScreen extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.green[900]!, Colors.green[700]!],
+                  // colors: [Colors.green[900]!, Colors.green[700]!],
+                  colors: [Theme.of(context).scaffoldBackgroundColor, ThemeSettings.generateSimilarColorHSL(Theme.of(context).scaffoldBackgroundColor)],
                 ),
               ),
               child: Padding(
@@ -93,13 +97,13 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       '"Cuando la sangre de tus venas retorne al mar, recordarás que esta tierra no '
                       'te pertenece, sino que tú perteneces a ella"',
-                      style: GoogleFonts.playfairDisplay(
+                      style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        // color: Colors.white,
                         height: 1.3,
                       ),
                       textAlign: TextAlign.center,

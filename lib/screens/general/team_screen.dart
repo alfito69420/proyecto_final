@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/screens/general/map_screen.dart';
+import 'package:proyecto_final/settings/theme_settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TeamScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[900], // Fondo verde oscuro
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         slivers: <Widget>[
           _buildSliverAppBar(context),
@@ -53,22 +54,20 @@ class TeamScreen extends StatelessWidget {
       expandedHeight: 200.0,
       floating: false,
       pinned: true,
-      backgroundColor: Colors.green[900],
+      backgroundColor: ThemeSettings.generateSimilarColorHSL(Theme.of(context).scaffoldBackgroundColor),
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           'Fundación Jaguares en la Selva',
-          style: GoogleFonts.oswald(
-            textStyle: TextStyle(
-              color: Theme.of(context).canvasColor,
-              fontSize: 16.0,
-              shadows: [
-                Shadow(
-                  blurRadius: 10.0,
-                  color: Colors.black,
-                  offset: Offset(5.0, 5.0),
-                ),
-              ],
-            ),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+            shadows: [
+              Shadow(
+                blurRadius: 10.0,
+                color: Colors.orange[800]!,
+                offset: Offset(5.0, 5.0),
+              ),
+            ],
           ),
         ),
         background: Stack(
@@ -83,7 +82,7 @@ class TeamScreen extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.green[900]!.withOpacity(0.7)],
+                  colors: [Colors.transparent, Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7)],
                 ),
               ),
             ),
@@ -121,12 +120,10 @@ class TeamScreen extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Text(
         title,
-        style: GoogleFonts.oswald(
-          textStyle: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.orange[800],
-          ),
+        style: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          color: Colors.orange[800],
         ),
       ),
     );
@@ -189,12 +186,10 @@ class TeamScreen extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.justify,
-      style: GoogleFonts.roboto(
-        textStyle: TextStyle(
-          fontSize: 16,
-          height: 1.5,
-          color: Colors.grey[800],
-        ),
+      style: TextStyle(
+        fontSize: 16,
+        height: 1.5,
+        color: Colors.grey[800],
       ),
     );
   }
@@ -210,12 +205,10 @@ class TeamScreen extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: GoogleFonts.roboto(
-                textStyle: TextStyle(
-                  fontSize: 16,
-                  height: 1.5,
-                  color: Colors.grey[800],
-                ),
+              style: TextStyle(
+                fontSize: 16,
+                height: 1.5,
+                color: Colors.grey[800],
               ),
             ),
           ),
@@ -268,12 +261,10 @@ class TeamScreen extends StatelessWidget {
         children: <Widget>[
           Text(
             'Contáctanos',
-            style: GoogleFonts.oswald(
-              textStyle: TextStyle(
+            style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.orange[800],
-              ),
             ),
           ),
           SizedBox(height: 12),
@@ -304,11 +295,9 @@ class TeamScreen extends StatelessWidget {
             Expanded(
               child: Text(
                 text,
-                style: GoogleFonts.roboto(
-                  textStyle: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[800],
-                  ),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey[800],
                 ),
               ),
             ),
