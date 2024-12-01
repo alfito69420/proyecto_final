@@ -13,21 +13,20 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   // Controladores para los campos de texto
-  late final TextEditingController txtUserController;
+  late final TextEditingController txtEmailController;
   late final TextEditingController txtpWDController;
 
   @override
   void initState() {
     super.initState();
-    txtUserController = TextEditingController();
+    txtEmailController = TextEditingController();
     txtpWDController = TextEditingController();
   }
 
   @override
   void dispose() {
-    txtUserController.dispose();
+    txtEmailController.dispose();
     txtpWDController.dispose();
     super.dispose();
   }
@@ -51,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     void signupUser() {
-      final email = txtUserController.text.trim();
+      final email = txtEmailController.text.trim();
       final password = txtpWDController.text.trim();
 
       if (email.isEmpty || password.isEmpty) {
@@ -110,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
             //  TEXTFIELD USUARIO
             MyTextField(
-              controller: txtUserController,
+              controller: txtEmailController,
               obscureText: false,
               hintText: 'Usuario',
             ),
@@ -207,16 +206,19 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
 
             // google + apple sign in buttons
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // google button
-                SquareTile(imagePath: 'assets/google.webp'),
-                SizedBox(width: 25),
+                SquareTile(
+                    onTap: () => AuthService().signInWithGoogle(context),
+                    imagePath: 'assets/google.webp'),
+                const SizedBox(width: 25),
                 // github button
-                SquareTile(imagePath: 'assets/github.png'),
-                SizedBox(width: 25),
-                SquareTile(imagePath: 'assets/fb.webp')
+                SquareTile(onTap: () {}, imagePath: 'assets/github.png'),
+                const SizedBox(width: 25),
+                //  facebook button
+                SquareTile(onTap: () {}, imagePath: 'assets/fb.webp')
               ],
             ),
 
