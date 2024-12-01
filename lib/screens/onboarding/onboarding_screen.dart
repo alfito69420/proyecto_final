@@ -80,15 +80,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 15),
               width: double.infinity,
               child: TextButton(
-                child: Text(
-                    currentIndex == contents.length - 1 ? 'Continue' : 'Next',
-                    style: GoogleFonts.getFont(
-                      'Oswald',
-                    )
-                ),
                 onPressed: () {
                   if (currentIndex == contents.length - 1) {
-                    Navigator.pushNamed(context, "/jaguarhome");
+                    Navigator.pushNamed(context, "/home");
                   }
                   _controller.nextPage(
                     duration: Duration(milliseconds: 100),
@@ -102,6 +96,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
+                child: Text(
+                    currentIndex == contents.length - 1 ? 'Continue' : 'Next',
+                    style: GoogleFonts.getFont(
+                      'Oswald',
+                    )
+                ),
               ),
             ),
           ],
@@ -114,7 +114,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Container(
       height: 10,
       width: currentIndex == index ? 25 : 10,
-      margin: EdgeInsets.only(right: 5),
+      margin: const EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Theme.of(context).primaryColor,

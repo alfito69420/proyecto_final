@@ -34,9 +34,6 @@ class JaguarHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Jaguares'),
-      ),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
