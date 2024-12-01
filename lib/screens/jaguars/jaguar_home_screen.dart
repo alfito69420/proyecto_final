@@ -93,7 +93,9 @@ class JaguarHomeScreen extends StatelessWidget {
                 mainAxisSpacing: 10,
               ),
               delegate: SliverChildBuilderDelegate(
+
                 (context, index) {
+
                   return JaguarCard(jaguar: jaguars[index]);
                 },
                 childCount: jaguars.length,

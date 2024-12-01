@@ -28,8 +28,8 @@ class JaguarCard extends StatelessWidget {
           children: [
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-                child: Image.network(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                child: Image.asset(
                   jaguar.imageUrl,
                   fit: BoxFit.cover,
                   width: double.infinity,
@@ -37,7 +37,7 @@ class JaguarCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -49,7 +49,7 @@ class JaguarCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     '${jaguar.age} años - ${jaguar.sex}',
                     style: Theme.of(context).textTheme.bodySmall,
