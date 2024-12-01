@@ -13,6 +13,25 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  // Controladores para los campos de texto
+  late final TextEditingController txtUserController;
+  late final TextEditingController txtpWDController;
+
+  @override
+  void initState() {
+    super.initState();
+    txtUserController = TextEditingController();
+    txtpWDController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    txtUserController.dispose();
+    txtpWDController.dispose();
+    super.dispose();
+  }
+
   //
   bool isLoading = false;
 
@@ -20,10 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final defaultColorScheme = Theme.of(context).colorScheme;
     final currentWidth = MediaQuery.of(context).size.width;
-
-    //  Controllers
-    final txtUserController = TextEditingController();
-    final txtpWDController = TextEditingController();
 
     //  Iniciar Sesion Metodo
     void signInUser() {
