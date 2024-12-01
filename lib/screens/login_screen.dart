@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:proyecto_final/components/my_textfield.dart';
 
+import '../components/square_tile.dart';
 import '../services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -125,9 +126,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            const SizedBox(
-              height: 75,
-            ),
+            /*const SizedBox(
+              height: 10,
+            ),*/
 
             //  SIGN IN BUTTON
             /*          MyButton(
@@ -154,9 +155,57 @@ class _LoginScreenState extends State<LoginScreen> {
                   )),
             ),
 
-            const SizedBox(
-              height: 50,
+            /*const SizedBox(
+              height: 25,
+            ),*/
+
+            // or continue with
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      thickness: 0.5,
+                      color: Colors.grey[400],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      'O continuar con',
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      thickness: 0.5,
+                      color: Colors.grey[400],
+                    ),
+                  ),
+                ],
+              ),
             ),
+
+            const SizedBox(
+              height: 25,
+            ),
+
+            // google + apple sign in buttons
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // google button
+                SquareTile(imagePath: 'assets/google.webp'),
+                SizedBox(width: 25),
+                // github button
+                SquareTile(imagePath: 'assets/github.png'),
+                SizedBox(width: 25),
+                SquareTile(imagePath: 'assets/fb.webp')
+              ],
+            ),
+
+            const SizedBox(height: 50),
 
             //  REGISTER BUTTON
             Row(
