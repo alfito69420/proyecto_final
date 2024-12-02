@@ -88,7 +88,8 @@ class HomeScreen extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   // colors: [Colors.green[900]!, Colors.green[700]!],
-                  colors: [Theme.of(context).scaffoldBackgroundColor, ThemeSettings.generateSimilarColorHSL(Theme.of(context).scaffoldBackgroundColor)],
+                  colors: [Theme.of(context).scaffoldBackgroundColor,
+                    ThemeSettings.generateSimilarColorHSL(Theme.of(context).scaffoldBackgroundColor)],
                 ),
               ),
               child: Padding(

@@ -96,6 +96,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
             leading: const Icon(Icons.room_preferences),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, "/us");
+            },
+            title: const Text("Sobre nosotros"),
+            subtitle: const Text("Conócenos"),
+            leading: const Icon(Icons.people),
+            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+          ),
           const Padding(
             padding: EdgeInsets.all(8),
             child: Divider(height: 2),
