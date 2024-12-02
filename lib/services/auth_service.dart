@@ -56,7 +56,6 @@ class AuthService {
   //  LOGIN CON GOOGLE
   signInWithGoogle(BuildContext context) async {
     final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
-
     final GoogleSignInAuthentication gAuth = await gUser!.authentication;
 
     final credential = GoogleAuthProvider.credential(
@@ -64,14 +63,14 @@ class AuthService {
       idToken: gAuth.idToken,
     );
 
-    await Future.delayed(const Duration(seconds: 1));
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => const DashboardScreen()));
+    await FirebaseAuth.instance.signInWithCredential(credential);
 
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const DashboardScreen()),
+    );
   }
+
 
   //  REGISTER CON EMAIL Y PASS
   Future<void> signup(

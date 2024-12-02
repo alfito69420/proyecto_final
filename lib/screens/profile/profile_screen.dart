@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/utils/text_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +20,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     //  Colores
     final defaultColorScheme = Theme.of(context).colorScheme;
+
+    final user = FirebaseAuth.instance.currentUser;
 
     //  External App Uris
     final Uri githubUrl = Uri.parse(TextStrings.github);
@@ -45,8 +48,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 120,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
-                        child: selectedImage != null
-                            ? Image.file(selectedImage!)
+                        child: user?.photoURL != null
+                            ? Image.network(user!.photoURL!) // Foto de perfil desde Google
                             : const Image(image: AssetImage("assets/pfp.jpg"))),
                   ),
                   /*Positioned(
@@ -76,10 +79,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                TextStrings.nickname,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
               const SizedBox(
                 height: 20,
               ),
@@ -88,7 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 10,
               ),
               ProfileMenuWidget(
-                title: TextStrings.nombre,
+                title: user?.displayName ?? "Nombre no disponible",
                 icon: const Icon(Icons.person),
                 onPress: () {},
               ),
@@ -96,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 30,
               ),
               ProfileMenuWidget(
-                title: TextStrings.email,
+                title: user?.email ?? "Correo no disponible",
                 icon: const Icon(Icons.email),
                 onPress: () {
                   // _launchUrl(email, context);
@@ -169,7 +168,9 @@ class ProfileMenuWidget extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.bodySmall,
+        style: const TextStyle(fontSize: 18),
+        overflow: TextOverflow.ellipsis,
+        maxLines: 1,
       ),
     );
   }

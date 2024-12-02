@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
@@ -63,23 +64,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget myDrawer() {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Drawer(
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
             currentAccountPicture: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                //child: selectedImage != null ? Image.file(selectedImage!) : const Image(image: AssetImage("assets/pfp.jpg"))),
-                child: const Image(image: AssetImage("assets/pfp.jpg"))),
-            accountName: const Text("Jaguar"),
-            accountEmail: const Text("jaguar@gmail.com"),
+              borderRadius: BorderRadius.circular(100),
+              child: user?.photoURL != null
+                  ? Image.network(user!.photoURL!) // Foto de perfil desde Google
+                  : const Image(image: AssetImage("assets/pfp.jpg")), // Placeholder
+            ),
+            accountName: Text(user?.displayName ?? "Nombre no disponible"),
+            accountEmail: Text(user?.email ?? "Correo no disponible"),
           ),
           ListTile(
             onTap: () {
               Navigator.pushNamed(context, "/profile");
             },
             title: const Text("Perfil"),
-            //subtitle: const Text("lorem ipsum"),
             leading: const Icon(Icons.person),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
@@ -93,23 +97,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
           const Padding(
-              padding: EdgeInsets.all(8),
-              child: Divider(
-                height: 2,
-              )),
+            padding: EdgeInsets.all(8),
+            child: Divider(height: 2),
+          ),
           ListTile(
             onTap: () {
-              /*print(
-                  "Custom theme enabled (logout): ${GlobalValues.customThemeEnabled.value}");*/
-              /*Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  ModalRoute.withName("/login"));*/
-
               AuthService().signout(context: context);
             },
             title: const Text("Cerrar Sesión"),
-            //subtitle: const Text("Tema / Fuente"),
             leading: const Icon(Icons.logout),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
@@ -117,4 +112,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
+
 }
