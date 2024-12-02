@@ -17,10 +17,18 @@ import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
 import 'package:proyecto_final/screens/profile/profile_screen.dart';
 import 'package:proyecto_final/screens/register_screen.dart';
 import 'package:proyecto_final/screens/services/preference_service.dart';
+import 'package:proyecto_final/utils/notifications.dart';
+
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Inicializa Firebase
+  //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ); // Inicializa Firebaseotifi
+
+  await FirebaseApi().initNotifications();
 
   final PreferenceService _preferenceService = PreferenceService();
   // Cargar el tema guardado
