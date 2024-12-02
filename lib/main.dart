@@ -5,6 +5,7 @@ import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
 import 'package:proyecto_final/screens/onboarding/onboarding_screen.dart';
+import 'package:proyecto_final/screens/profile/profile_screen.dart';
 import 'package:proyecto_final/screens/register_screen.dart';
 
 void main() async {
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         "/register": (context) => const RegisterScreen(),
         "/onboarding": (context) => const OnboardingScreen(),
         "/jaguarhome": (context) => JaguarHomeScreen(),
+        "/profile": (context) => const ProfileScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

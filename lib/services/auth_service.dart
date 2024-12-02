@@ -9,7 +9,7 @@ import 'package:proyecto_final/screens/login_screen.dart';
 class AuthService {
   static final GoogleSignIn _googleSignIn = GoogleSignIn(); // <----
 
-  //  LOGIN CON FABECOOK
+  //  LOGIN CON FACEBOOK
 
   //  LOGIN CON GITHUB
   githubLogin(BuildContext context) {
@@ -42,7 +42,7 @@ class AuthService {
       await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
 
       ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Login Exitoso Perra")));
+          .showSnackBar(const SnackBar(content: Text("Login Exitoso.")));
 
       Navigator.pushReplacement(
         context,
