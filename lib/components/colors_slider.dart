@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ColorsSlider extends StatefulWidget {
   const ColorsSlider({
@@ -82,10 +81,6 @@ class _ColorsSliderState extends State<ColorsSlider> {
         ),
         child: Text(
           widget.buttonTxt ?? 'Color',
-          style: GoogleFonts.getFont(
-            widget.currentFont,
-            color: Theme.of(context).textTheme.bodyMedium!.color,
-          )
         ),
       ),
     );

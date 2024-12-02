@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
 
 class VerticalHome extends StatelessWidget {

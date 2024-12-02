@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/onboardingContent.dart';
 import 'package:proyecto_final/screens/responsives/onboarding/horizontal.dart';
 import 'package:proyecto_final/screens/responsives/onboarding/vertical.dart';
@@ -82,9 +81,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: TextButton(
                 child: Text(
                     currentIndex == contents.length - 1 ? 'Continuar' : 'Siguiente',
-                    style: GoogleFonts.getFont(
-                      'Roboto',
-                    )
                 ),
                 onPressed: () {
                   if (currentIndex == contents.length - 1) {

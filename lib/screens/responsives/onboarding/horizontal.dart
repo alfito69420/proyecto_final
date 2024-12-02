@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/onboardingContent.dart';
 
 class Horizontal extends StatefulWidget {
@@ -49,11 +48,6 @@ class _HorizontalState extends State<Horizontal> {
               children: [
                 Text(
                   widget.content.title!,
-                  style: GoogleFonts.getFont(
-                    widget.currentFont != null ? widget.currentFont! : 'Roboto',
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
                 SizedBox(height: 15),
                 widget.index != null && widget.index == 2 ?
@@ -69,11 +63,6 @@ class _HorizontalState extends State<Horizontal> {
                 Text(
                   widget.content.description!,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.getFont(
-                    widget.currentFont != null ? widget.currentFont! : 'Roboto',
-                    fontSize: 16,
-                    //color: Colors.grey
-                  ),
                 )
               ]
             ),
@@ -111,9 +100,6 @@ class _HorizontalState extends State<Horizontal> {
           child: Text(
             text,
             textAlign: TextAlign.center,
-            style: GoogleFonts.getFont(
-              widget.currentFont != null ? widget.currentFont! : 'Roboto',
-            ),
             softWrap: true, // Permite el ajuste automático al renglón siguiente
             overflow: TextOverflow.clip, // El texto se corta dentro de los límites
           ),

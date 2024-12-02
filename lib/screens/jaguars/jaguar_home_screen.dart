@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/components/post_banner.dart';
 import 'package:proyecto_final/components/jaguar_card.dart';
 import 'package:proyecto_final/models/jaguar.dart';
@@ -44,11 +43,6 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
                 Text(
                   '¡Jaguares Liberados!',
                   textAlign: TextAlign.start,
-                  style: GoogleFonts.getFont(
-                    'Roboto',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold
-                  )
                 ),
                 SizedBox(height: 10,),
                 JaguarCarouselScreen(
@@ -71,11 +65,6 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
                 SizedBox(height: 10,),
                 Text(
                   'Jaguares para Adoptar',
-                  style: GoogleFonts.getFont(
-                    'Roboto',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold
-                  )
                 ),
                 SizedBox(height: 10,),
               ],

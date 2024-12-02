@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/onboardingContent.dart';
 
 class Vertical extends StatefulWidget {
@@ -51,11 +50,6 @@ class _VerticalState extends State<Vertical> {
           Text(
             widget.content.title!,
             textAlign: TextAlign.center,
-            style: GoogleFonts.getFont(
-              widget.currentFont != null ? widget.currentFont! : 'Roboto',
-              fontSize: widget.index != null && widget.index == 2 ? 28 : 32,
-              fontWeight: FontWeight.bold,
-            ),
           ),
           SizedBox(
             height: widget.index != null && widget.index == 2 ? 15 : 20,
@@ -72,11 +66,6 @@ class _VerticalState extends State<Vertical> {
           Text(
               widget.content.description!,
               textAlign: TextAlign.center,
-              style: GoogleFonts.getFont(
-                widget.currentFont != null ? widget.currentFont! : 'Roboto',
-                fontSize: 16,
-                //color: Colors.grey
-              ),
             ),
         ],
       ),
@@ -107,9 +96,6 @@ class _VerticalState extends State<Vertical> {
         SizedBox(height: 3),
         Text(
           text,
-          style: GoogleFonts.getFont(
-            widget.currentFont != null ? widget.currentFont! : 'Roboto',
-          ), // Aplicar fuente de muestra
         ),
         SizedBox(height: 10),
       ],

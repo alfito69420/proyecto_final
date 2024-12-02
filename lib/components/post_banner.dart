@@ -1,6 +1,6 @@
 // lib/widgets/baby_jaguar_banner.dart
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/post.dart';
 
 class PostBanner extends StatelessWidget {
@@ -51,24 +51,24 @@ class PostBanner extends StatelessWidget {
                 children: [
                   Text(
                     post.title,
-                    style: GoogleFonts.oswald(
+                    /*style: GoogleFonts.oswald(
                       textStyle: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
-                    ),
+                    ),*/
                   ),
                   SizedBox(height: 4),
                   Text(
                     post.jaguarName ?? post.subtitle,
-                    style: GoogleFonts.roboto(
+                    /*style: GoogleFonts.roboto(
                       textStyle: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
-                    ),
+                    ),*/
                   ),
                 ],
               ),
