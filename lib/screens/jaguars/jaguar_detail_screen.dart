@@ -2,10 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/models/jaguar.dart';
 
+import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
+
 class JaguarDetailScreen extends StatelessWidget {
   final Jaguar jaguar;
 
-  const JaguarDetailScreen({super.key, required this.jaguar});
+  const JaguarDetailScreen({Key? key, required this.jaguar}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,19 @@ class JaguarDetailScreen extends StatelessWidget {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(jaguar.name,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 10.0,
+                        color: Colors.black,
+                        offset: Offset(5.0, 5.0),
+                      ),
+                    ],
                   ),
+                ),
               background: Hero(
                 tag: 'jaguar-${jaguar.name}',
                 child: Image.asset(
@@ -35,16 +49,17 @@ class JaguarDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildInfoCard(),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   Text(
                     'Descripción',
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     jaguar.description,
                   ),
-                  const SizedBox(height: 24),
-                  _buildAdoptButton(context),
+                  // Solo si no ha sido adoptado o liberado, puede adoptarse
+                  if(jaguar.status == 'Disponible') SizedBox(height: 24),
+                  if(jaguar.status == 'Disponible') _buildAdoptButton(context),
                 ],
               ),
             ),
@@ -65,6 +80,11 @@ class JaguarDetailScreen extends StatelessWidget {
           children: [
             _buildInfoItem(Icons.cake, '${jaguar.age} años'),
             _buildInfoItem(jaguar.sex == 'Macho' ? Icons.male : Icons.female, jaguar.sex),
+            _buildInfoItem(
+              jaguar.status == 'Liberado' || jaguar.status == 'Adoptado'
+              ? Icons.done 
+              : Icons.pending, jaguar.status
+            ),
           ],
         ),
       ),
@@ -75,7 +95,7 @@ class JaguarDetailScreen extends StatelessWidget {
     return Column(
       children: [
         Icon(icon, size: 30, color: Colors.orange[800]),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           text,
         ),
@@ -86,21 +106,28 @@ class JaguarDetailScreen extends StatelessWidget {
   Widget _buildAdoptButton(BuildContext context) {
     return Center(
       child: ElevatedButton.icon(
-        icon: const Icon(Icons.pets),
+        icon: Icon(Icons.pets),
         label: Text('Adoptar a ${jaguar.name}'),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.orange[800],
           foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          textStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
         ),
         onPressed: () {
-          // Aquí puedes agregar la lógica para el proceso de adopción
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('¡Gracias por querer adoptar a ${jaguar.name}!')),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PlanSelectionScreen()),
           );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   SnackBar(content: Text('¡Gracias por querer adoptar a ${jaguar.name}!')),
+          // );
         },
       ),
     );

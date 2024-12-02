@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:proyecto_final/utils/text_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -101,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 title: TextStrings.email,
                 icon: const Icon(Icons.email),
                 onPress: () {
-                 // _launchUrl(email, context);
+                  // _launchUrl(email, context);
                 },
               ),
               const SizedBox(
@@ -141,107 +139,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
     }
   }
-
-  Future _pickImageFromPhone() async {
-    final returnedPickedImage =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    if (returnedPickedImage != null) {
-      setState(() {
-        selectedImage = File(returnedPickedImage.path);
-      });
-      _saveImagePath(returnedPickedImage.path); // Guardar la ruta
-    }
-  }
-
-  Future _pickImageFromCamera() async {
-    final returnedPickedImage =
-    await ImagePicker().pickImage(source: ImageSource.camera);
-
-    if (returnedPickedImage != null) {
-      setState(() {
-        selectedImage = File(returnedPickedImage.path);
-      });
-      _saveImagePath(returnedPickedImage.path); // Guardar la ruta
-    }
-  }
-
-  Future showCameraGalleryOption(BuildContext context) async {
-    showModalBottomSheet(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 7,
-            child: Column(
-              children: [
-                const Row(),
-                const SizedBox(
-                  height: 32,
-                ),
-                InkWell(
-                  onTap: () {
-                    _pickImageFromPhone();
-                    Navigator.pop(context);
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.storage,
-                        size: 30,
-                      ),
-                      Text("Galeria"),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                InkWell(
-                  onTap: () {
-                    _pickImageFromCamera();
-                    Navigator.pop(context);
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.camera,
-                        size: 30,
-                      ),
-                      Text("Camara")
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> _launchUrl(Uri uri, BuildContext context) async {
-    if (!await launchUrl(uri)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('No se pudo abrir el enlace o la aplicación.')),
-      );
-      throw Exception('Could not launch $uri');
-    }
-  }
 }
 
 class ProfileMenuWidget extends StatelessWidget {
   const ProfileMenuWidget(
       {super.key,
-        required this.title,
-        required this.icon,
-        required this.onPress,
-        this.textColor});
+      required this.title,
+      required this.icon,
+      required this.onPress,
+      this.textColor});
 
   final String title;
   final Icon icon;
