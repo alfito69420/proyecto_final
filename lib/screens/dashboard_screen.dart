@@ -75,7 +75,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           ListTile(
             onTap: () {
-              //Navigator.pushNamed(context, "/movies");
+              Navigator.pushNamed(context, "/profile");
             },
             title: const Text("Perfil"),
             //subtitle: const Text("lorem ipsum"),
