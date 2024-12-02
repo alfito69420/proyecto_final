@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/components/post_banner.dart';
 import 'package:proyecto_final/components/jaguar_card.dart';
 import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/models/post.dart';
 import 'package:proyecto_final/screens/general/post_screen.dart';
+import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_carousel_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_detail_screen.dart';
 
@@ -24,6 +26,19 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Jaguares'),
+        actions: [
+          IconButton(
+            icon: FaIcon(FontAwesomeIcons.cat),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AdoptedJaguarsScreen(adoptedJaguars: [],)                  
+                ),
+              );
+            }
+          ),
+        ],
       ),
       body: CustomScrollView(
         slivers: [

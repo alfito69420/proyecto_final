@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/screens/pagos/payment_info_screen.dart';
 import 'package:proyecto_final/settings/theme_settings.dart';
 
@@ -8,6 +9,7 @@ class PlanDetailsScreen extends StatelessWidget {
   final String planDescription;
   final double planPrice;
   final String imgUrl;
+  final Jaguar jaguar;
   final int planId;
 
   const PlanDetailsScreen({
@@ -16,6 +18,7 @@ class PlanDetailsScreen extends StatelessWidget {
     required this.planDescription,
     required this.planPrice,
     required this.imgUrl,
+    required this.jaguar,
     required this.planId,
   }) : super(key: key);
 
@@ -84,6 +87,7 @@ class PlanDetailsScreen extends StatelessWidget {
                           builder: (context) => PaymentInfoScreen(
                             planTitle: planTitle,
                             planPrice: planPrice,
+                            jaguar: jaguar,
                             planId: planId,
                           ),
                         ),

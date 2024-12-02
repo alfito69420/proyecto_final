@@ -23,7 +23,7 @@ List<Jaguar> jaguars = [
     sex: 'Macho',
     imageUrl: 'assets/jaguars/autano1.jpg',
     description: 'Autano es un jaguar wey. Le encanta explorar su hábitat y es muy ágil al trepar árboles.',
-    status: 'Disponible',
+    status: 'Refugio',
   ),
   Jaguar(
     name: 'Balam',
@@ -31,7 +31,7 @@ List<Jaguar> jaguars = [
     sex: 'Macho',
     imageUrl: 'assets/jaguars/balam1.jpg',
     description: 'Balam es un jaguar fuerte y territorial. Tiene un pelaje oscuro y manchas bien definidas.',
-    status: 'Adoptado'
+    status: 'Refugio'
   ),
   Jaguar(
     name: 'Sugar',

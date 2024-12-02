@@ -68,9 +68,9 @@ class JaguarDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Solo si no ha sido adoptado o liberado, puede adoptarse
-                  if(jaguar.status == 'Disponible') SizedBox(height: 24),
-                  if(jaguar.status == 'Disponible') _buildAdoptButton(context),
+                  // Solo si no ha sido liberado (En refugio), puede adoptarse
+                  if(jaguar.status == 'Refugio') SizedBox(height: 24),
+                  if(jaguar.status == 'Refugio') _buildAdoptButton(context),
                 ],
               ),
             ),
@@ -92,7 +92,7 @@ class JaguarDetailScreen extends StatelessWidget {
             _buildInfoItem(Icons.cake, '${jaguar.age} años'),
             _buildInfoItem(jaguar.sex == 'Macho' ? Icons.male : Icons.female, jaguar.sex),
             _buildInfoItem(
-              jaguar.status == 'Liberado' || jaguar.status == 'Adoptado'
+              jaguar.status == 'Liberado'
               ? Icons.done 
               : Icons.pending, jaguar.status
             ),
@@ -140,7 +140,9 @@ class JaguarDetailScreen extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => PlanSelectionScreen()),
+            MaterialPageRoute(builder: (context) => PlanSelectionScreen(
+              jaguar: jaguar
+            )),
           );
           // ScaffoldMessenger.of(context).showSnackBar(
           //   SnackBar(content: Text('¡Gracias por querer adoptar a ${jaguar.name}!')),

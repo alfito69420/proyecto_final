@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_final/provider/provider_vars.dart';
 import 'package:proyecto_final/screens/general/map_screen.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
 import 'package:proyecto_final/screens/general/theme_screen.dart';
 import 'package:proyecto_final/screens/home_screen.dart';
+import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
@@ -16,6 +18,9 @@ import 'package:proyecto_final/screens/services/preference_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Inicio de Stripe con llave pública
+  Stripe.publishableKey = 'pk_test_51QRMHTBUKCGrTpw3wWlgmjx85Kzl3rSvUyVcHrIERvG307Qf7md2WioG8WhIEONZFXzbZDHHeZm7P2tcEIvUU5gI00xuCcrYET';
+  await Stripe.instance.applySettings();
   final PreferenceService _preferenceService = PreferenceService();
   // Cargar el tema guardado
   final ThemeData loadedTheme = await _preferenceService.loadTheme();
@@ -47,7 +52,7 @@ class MyApp extends StatelessWidget {
               "/us": (context) => TeamScreen(),
               "/locationmap": (context) => MapLocation(),
               "/themes": (context) => ThemeScreen(),
-              "/planselect": (context) => PlanSelectionScreen(),
+              // "/adoptions": (context) => AdoptedJaguarsScreen(),
             },
             debugShowCheckedModeBanner: false,
           );

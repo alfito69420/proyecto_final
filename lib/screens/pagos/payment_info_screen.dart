@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/screens/pagos/payment_confirmation_screen.dart';
+import 'package:proyecto_final/screens/services/payment_service.dart';
 import 'package:proyecto_final/settings/theme_settings.dart';
 
 class PaymentInfoScreen extends StatefulWidget {
   final String planTitle;
   final double planPrice;
+  final Jaguar jaguar;
   final int planId;
 
   const PaymentInfoScreen({
     Key? key,
     required this.planTitle,
     required this.planPrice,
+    required this.jaguar,
     required this.planId,
   }) : super(key: key);
 
@@ -20,6 +25,50 @@ class PaymentInfoScreen extends StatefulWidget {
 }
 
 class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
+  Future<void> makePayment(price) async {
+    try {
+      // 1. Solicitar el Payment Intent al backend
+      final paymentIntent = await PaymentService().fetchPaymentIntent(price); // Monto en centavos
+      print('PAGO: ${paymentIntent['client_secret']}');
+
+      // 2. Inicializar el pago en Flutter
+      await Stripe.instance.initPaymentSheet(
+        paymentSheetParameters: SetupPaymentSheetParameters(
+          paymentIntentClientSecret: paymentIntent['client_secret'],
+          merchantDisplayName: 'Jaguar App'
+        ),
+      );
+
+      // 3. Mostrar la hoja de pago
+      await Stripe.instance.presentPaymentSheet();
+
+      // 4. Confirmación
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Pago exitoso')));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PaymentConfirmationScreen(
+            planTitle: widget.planTitle,
+            planPrice: widget.planPrice,
+            jaguar: widget.jaguar,
+            planId: widget.planId,
+          ),
+        ),
+      );
+    } catch (e) {
+      print('Error during payment process: $e');
+      if (e is StripeException) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Stripe error: ${e.error.localizedMessage}')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('An unexpected error occurred: $e')),
+        );
+      }
+    }
+  }
+
   final _formKey = GlobalKey<FormState>();
   String _cardNumber = '';
   String _expiryDate = '';
@@ -170,21 +219,11 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
     );
   }
 
-  void _submitPayment() {
+  void _submitPayment() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       // Aquí iría la lógica para procesar el pago
-      // Por ahora, solo navegaremos a la pantalla de confirmación
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PaymentConfirmationScreen(
-            planTitle: widget.planTitle,
-            planPrice: widget.planPrice,
-            planId: widget.planId,
-          ),
-        ),
-      );
+      await makePayment(widget.planPrice.round() * 100); // Se multiplica x 100 pq el Stripe así lo toma
     }
   }
 }
