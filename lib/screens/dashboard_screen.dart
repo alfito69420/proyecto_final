@@ -85,7 +85,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           ListTile(
             onTap: () {
-              //Navigator.pushNamed(context, "/preferences_drawer");
+              Navigator.pushNamed(context, "/themes");
             },
             title: const Text("Preferencias"),
             subtitle: const Text("Tema / Fuente"),

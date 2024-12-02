@@ -14,6 +14,7 @@ import 'package:proyecto_final/screens/onboarding_screen.dart';
 import 'package:proyecto_final/screens/pagos/payment_info_screen.dart';
 import 'package:proyecto_final/screens/pagos/plan_details_screen.dart';
 import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
+import 'package:proyecto_final/screens/profile/profile_screen.dart';
 import 'package:proyecto_final/screens/services/preference_service.dart';
 
 void main() async {
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
               "/locationmap": (context) => MapLocation(),
               "/themes": (context) => ThemeScreen(),
               "/planselect": (context) => PlanSelectionScreen(),
+              "/profile": (context) => const ProfileScreen(),
             },
             debugShowCheckedModeBanner: false,
           );

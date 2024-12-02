@@ -112,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                     HorizontalHome()
                     :
                     VerticalHome(),
-                    customThemeBtn(context)
+                    //customThemeBtn(context)
                   ],
                 ),
               ),
