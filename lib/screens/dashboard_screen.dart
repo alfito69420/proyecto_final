@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
+import 'home_screen.dart';
 import 'jaguars/jaguar_home_screen.dart';
 import 'login_screen.dart';
 
@@ -57,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       drawer: myDrawer(),
-      body: Builder(builder: (context) => JaguarHomeScreen(),)
+      body: Builder(builder: (context) => HomeScreen(),)
     );
   }
 

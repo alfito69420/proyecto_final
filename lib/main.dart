@@ -18,6 +18,8 @@ import 'package:proyecto_final/screens/services/preference_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Inicializa Firebase
+
   final PreferenceService _preferenceService = PreferenceService();
   // Cargar el tema guardado
   final ThemeData loadedTheme = await _preferenceService.loadTheme();
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
         builder: (context, providerVars, child) {
           return MaterialApp(
             title: 'Jaguares en la Selva',
-            home: OnboardingScreen(),
+            home: const LoginScreen(),
             theme: providerVars.currentTheme,
             routes: {
               "/login": (context) => const LoginScreen(),
