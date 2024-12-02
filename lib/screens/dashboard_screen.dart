@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../services/auth_service.dart';
+import 'home_screen.dart';
+import 'jaguars/jaguar_home_screen.dart';
 import 'login_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -35,7 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
         title: Text(
-          "APP Bomberos",
+          "Jaguar",
           style: TextStyle(color: defaultColorScheme.onPrimary),
         ),
         actions: [
@@ -55,31 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       drawer: myDrawer(),
-      body: ListView.builder(
-        itemCount: 7,
-        itemBuilder: (BuildContext context, int index) {
-          return const Column(
-            children: [
-              ListTile(
-                leading: Icon(Icons.file_copy),
-                title: Text('Reporte'),
-                subtitle: Text('Reporte #'),
-                trailing: Icon(Icons.edit_note),
-              ),
-              Divider(
-                thickness: 0.5,
-                endIndent: 25,
-                indent: 25,
-              ),
-            ],
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: defaultColorScheme.primary,
-        onPressed: () {},
-        child: const Icon(Icons.add, color: Colors.white, size: 28),
-      ),
+      body: Builder(builder: (context) => HomeScreen(),)
     );
   }
 
@@ -92,12 +71,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 borderRadius: BorderRadius.circular(100),
                 //child: selectedImage != null ? Image.file(selectedImage!) : const Image(image: AssetImage("assets/pfp.jpg"))),
                 child: const Image(image: AssetImage("assets/pfp.jpg"))),
-            accountName: const Text("sun&moon"),
-            accountEmail: const Text("zenwol@gmail.com"),
+            accountName: const Text("Jaguar"),
+            accountEmail: const Text("jaguar@gmail.com"),
           ),
           ListTile(
             onTap: () {
-              //Navigator.pushNamed(context, "/movies");
+              Navigator.pushNamed(context, "/profile");
             },
             title: const Text("Perfil"),
             //subtitle: const Text("lorem ipsum"),
@@ -122,10 +101,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onTap: () {
               /*print(
                   "Custom theme enabled (logout): ${GlobalValues.customThemeEnabled.value}");*/
-              Navigator.pushAndRemoveUntil(
+              /*Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  ModalRoute.withName("/login"));
+                  ModalRoute.withName("/login"));*/
+
+              AuthService().signout(context: context);
             },
             title: const Text("Cerrar Sesión"),
             //subtitle: const Text("Tema / Fuente"),

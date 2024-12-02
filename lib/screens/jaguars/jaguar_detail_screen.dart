@@ -1,6 +1,7 @@
 // lib/screens/jaguar_detail_screen.dart
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+
 import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
 
 class JaguarDetailScreen extends StatelessWidget {
