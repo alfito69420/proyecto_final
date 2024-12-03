@@ -1,7 +1,7 @@
 // lib/screens/jaguar_detail_screen.dart
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+
 import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
 
 class JaguarDetailScreen extends StatelessWidget {
@@ -52,21 +52,10 @@ class JaguarDetailScreen extends StatelessWidget {
                   SizedBox(height: 24),
                   Text(
                     'Descripción',
-                    style: GoogleFonts.oswald(
-                      textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.orange[800],
-                      ),
-                    ),
                   ),
                   SizedBox(height: 8),
                   Text(
                     jaguar.description,
-                    style: GoogleFonts.roboto(
-                      textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        height: 1.5,
-                      ),
-                    ),
                   ),
                   // Solo si no ha sido liberado (En refugio), puede adoptarse
                   if(jaguar.status == 'Refugio') SizedBox(height: 24),
@@ -109,12 +98,6 @@ class JaguarDetailScreen extends StatelessWidget {
         SizedBox(height: 8),
         Text(
           text,
-          style: GoogleFonts.roboto(
-            textStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
         ),
       ],
     );

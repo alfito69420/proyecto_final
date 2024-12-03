@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_final/models/onboardingContent.dart';
-import 'package:proyecto_final/screens/responsives/onboarding/horizontal.dart';
-import 'package:proyecto_final/screens/responsives/onboarding/vertical.dart';
+import 'package:proyecto_final/screens/onboarding/content_model.dart';
+import 'package:proyecto_final/screens/onboarding/responsive-screens/horizontal.dart';
+import 'package:proyecto_final/screens/onboarding/responsive-screens/vertical.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -51,13 +51,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     return Vertical(
                       content: contents[i], 
                       index: currentIndex,
-                      currentFont: 'Roboto',
+                      currentFont: 'Oswald',
                     );
                   } else {
                     return Horizontal(
                       content: contents[i],
                       index: currentIndex,
-                      currentFont: 'Roboto',
+                      currentFont: 'Oswald',
                     );
                   }
                 }
@@ -79,12 +79,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 15),
               width: double.infinity,
               child: TextButton(
-                child: Text(
-                    currentIndex == contents.length - 1 ? 'Continuar' : 'Siguiente',
-                ),
                 onPressed: () {
                   if (currentIndex == contents.length - 1) {
-                    Navigator.pushNamed(context, "/newhome");
+                    Navigator.pushNamed(context, "/home");
                   }
                   _controller.nextPage(
                     duration: Duration(milliseconds: 100),
@@ -98,6 +95,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
+                child: Text(
+                    currentIndex == contents.length - 1 ? 'Continue' : 'Next',
+                ),
               ),
             ),
           ],
@@ -110,7 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Container(
       height: 10,
       width: currentIndex == index ? 25 : 10,
-      margin: EdgeInsets.only(right: 5),
+      margin: const EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Theme.of(context).primaryColor,

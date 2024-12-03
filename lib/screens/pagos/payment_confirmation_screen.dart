@@ -50,23 +50,10 @@ class PaymentConfirmationScreen extends StatelessWidget {
                   SizedBox(height: 24),
                   Text(
                     '¡Pago Exitoso!',
-                    style: GoogleFonts.oswald(
-                      textStyle: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
                   ),
                   SizedBox(height: 16),
                   Text(
                     'Gracias por tu compra del $planTitle',
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white70,
-                      ),
-                    ),
                     textAlign: TextAlign.center,
                   ),
                   Text(
@@ -82,12 +69,6 @@ class PaymentConfirmationScreen extends StatelessWidget {
                   SizedBox(height: 15),
                   Text(
                     'Monto pagado: \$${planPrice.toStringAsFixed(2)} MXN',
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white70,
-                      ),
-                    ),
                   ),
                   SizedBox(height: 32),
                   ElevatedButton(

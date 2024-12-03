@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../services/auth_service.dart';
+import 'home_screen.dart';
+import 'jaguars/jaguar_home_screen.dart';
 import 'login_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -35,7 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
         title: Text(
-          "APP Bomberos",
+          "Jaguar",
           style: TextStyle(color: defaultColorScheme.onPrimary),
         ),
         actions: [
@@ -55,80 +59,61 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       drawer: myDrawer(),
-      body: ListView.builder(
-        itemCount: 7,
-        itemBuilder: (BuildContext context, int index) {
-          return const Column(
-            children: [
-              ListTile(
-                leading: Icon(Icons.file_copy),
-                title: Text('Reporte'),
-                subtitle: Text('Reporte #'),
-                trailing: Icon(Icons.edit_note),
-              ),
-              Divider(
-                thickness: 0.5,
-                endIndent: 25,
-                indent: 25,
-              ),
-            ],
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: defaultColorScheme.primary,
-        onPressed: () {},
-        child: const Icon(Icons.add, color: Colors.white, size: 28),
-      ),
+      body: Builder(builder: (context) => HomeScreen(),)
     );
   }
 
   Widget myDrawer() {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Drawer(
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
             currentAccountPicture: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                //child: selectedImage != null ? Image.file(selectedImage!) : const Image(image: AssetImage("assets/pfp.jpg"))),
-                child: const Image(image: AssetImage("assets/pfp.jpg"))),
-            accountName: const Text("sun&moon"),
-            accountEmail: const Text("zenwol@gmail.com"),
+              borderRadius: BorderRadius.circular(100),
+              child: user?.photoURL != null
+                  ? Image.network(user!.photoURL!) // Foto de perfil desde Google
+                  : const Image(image: AssetImage("assets/pfp.jpg")), // Placeholder
+            ),
+            accountName: Text(user?.displayName ?? "Nombre no disponible"),
+            accountEmail: Text(user?.email ?? "Correo no disponible"),
           ),
           ListTile(
             onTap: () {
-              //Navigator.pushNamed(context, "/movies");
+              Navigator.pushNamed(context, "/profile");
             },
             title: const Text("Perfil"),
-            //subtitle: const Text("lorem ipsum"),
             leading: const Icon(Icons.person),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
           ListTile(
             onTap: () {
-              //Navigator.pushNamed(context, "/preferences_drawer");
+              Navigator.pushNamed(context, "/themes");
             },
             title: const Text("Preferencias"),
             subtitle: const Text("Tema / Fuente"),
             leading: const Icon(Icons.room_preferences),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
-          const Padding(
-              padding: EdgeInsets.all(8),
-              child: Divider(
-                height: 2,
-              )),
           ListTile(
             onTap: () {
-              /*print(
-                  "Custom theme enabled (logout): ${GlobalValues.customThemeEnabled.value}");*/
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  ModalRoute.withName("/login"));
+              Navigator.pushNamed(context, "/us");
+            },
+            title: const Text("Sobre nosotros"),
+            subtitle: const Text("Conócenos"),
+            leading: const Icon(Icons.people),
+            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(8),
+            child: Divider(height: 2),
+          ),
+          ListTile(
+            onTap: () {
+              AuthService().signout(context: context);
             },
             title: const Text("Cerrar Sesión"),
-            //subtitle: const Text("Tema / Fuente"),
             leading: const Icon(Icons.logout),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
@@ -136,4 +121,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
+
 }

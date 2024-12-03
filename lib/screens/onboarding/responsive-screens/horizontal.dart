@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_final/models/onboardingContent.dart';
+import 'package:proyecto_final/screens/onboarding/content_model.dart';
 
 class Horizontal extends StatefulWidget {
   Horizontal(
@@ -49,13 +49,11 @@ class _HorizontalState extends State<Horizontal> {
                 Text(
                   widget.content.title!,
                 ),
-                SizedBox(height: 15),
                 widget.index != null && widget.index == 2 ?
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Column(
                   children: [
                       numberCounter('1', 'Jaguar silvestre nacido'),
-                      numberCounter('5', 'Jaguares liberados en selvas seguras'),
+                      numberCounter('5', 'Jaguares rehabilitados y liberados en selvas seguras'),
                       numberCounter('11', 'Jaguares en proceso de rehabilitación'),
                   ],
                 )
@@ -63,6 +61,7 @@ class _HorizontalState extends State<Horizontal> {
                 Text(
                   widget.content.description!,
                   textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
                 )
               ]
             ),
@@ -72,44 +71,34 @@ class _HorizontalState extends State<Horizontal> {
     );
   }
 
-  Widget numberCounter(String number, String text) {
-  return Column(
-    children: [
-      IntrinsicHeight(
-        child: Container(
-          color: Theme.of(context).primaryColor,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Center(
-              child: Text(
-                '$number',
-                style: TextStyle(
-                  fontSize: 32,
-                  color: Theme.of(context).canvasColor,
-                  fontWeight: FontWeight.bold,
+  Widget numberCounter(number, text) {
+    return Column(
+      children: [
+        IntrinsicWidth(
+          child: Container(
+            color: Theme.of(context).primaryColor,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8),
+              child: Center(
+                child: Text(
+                  '${number}',
+                  style: TextStyle(
+                    fontSize: 32,
+                    //color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-      const SizedBox(height: 3),
-      Container(
-        width: 120, // Asigna un ancho específico al contenedor
-        child: Center(
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            softWrap: true, // Permite el ajuste automático al renglón siguiente
-            overflow: TextOverflow.clip, // El texto se corta dentro de los límites
-          ),
+        SizedBox(height: 3),
+        Text(
+          text, // Aplicar fuente de muestra
         ),
-      ),
-      const SizedBox(height: 10),
-    ],
-  );
-}
-
-
+        SizedBox(height: 10),
+      ],
+    );
+  }
 
 }

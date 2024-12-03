@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:proyecto_final/models/caroussel_item.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
@@ -89,7 +88,8 @@ class HomeScreen extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   // colors: [Colors.green[900]!, Colors.green[700]!],
-                  colors: [Theme.of(context).scaffoldBackgroundColor, ThemeSettings.generateSimilarColorHSL(Theme.of(context).scaffoldBackgroundColor)],
+                  colors: [Theme.of(context).scaffoldBackgroundColor,
+                    ThemeSettings.generateSimilarColorHSL(Theme.of(context).scaffoldBackgroundColor)],
                 ),
               ),
               child: Padding(
@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                     HorizontalHome()
                     :
                     VerticalHome(),
-                    customThemeBtn(context)
+                    //customThemeBtn(context)
                   ],
                 ),
               ),

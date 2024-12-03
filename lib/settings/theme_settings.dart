@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ThemeSettings {
   static ThemeData lightTheme(){
@@ -30,9 +29,9 @@ class ThemeSettings {
       primaryColor: primaryColor,
       scaffoldBackgroundColor: scaffoldBackgroundColor,
       appBarTheme: AppBarTheme(color: scaffoldBackgroundColor),
-      textTheme: baseTheme.textTheme.apply(
+      /*textTheme: baseTheme.textTheme.apply(
         fontFamily: GoogleFonts.getFont(fontFamily).fontFamily,
-      ),
+      ),*/
     );
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_final/models/onboardingContent.dart';
+import 'package:proyecto_final/screens/onboarding/content_model.dart';
 
 class Vertical extends StatefulWidget {
   Vertical({super.key,
@@ -58,7 +58,7 @@ class _VerticalState extends State<Vertical> {
           Column(
             children: [
                 numberCounter('1', 'Jaguar silvestre nacido'),
-                numberCounter('5', 'Jaguares liberados en selvas seguras'),
+                numberCounter('5', 'Jaguares rehabilitados y liberados en selvas seguras'),
                 numberCounter('11', 'Jaguares en proceso de rehabilitación'),
             ],
           )
@@ -85,7 +85,7 @@ class _VerticalState extends State<Vertical> {
                   '${number}',
                   style: TextStyle(
                     fontSize: 26,
-                    // color: Theme.of(context).canvasColor,
+                    //color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

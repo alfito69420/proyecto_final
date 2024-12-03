@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:proyecto_final/screens/general/team_screen.dart';
 
 class VerticalHome extends StatelessWidget {
   const VerticalHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
+    return SingleChildScrollView(
+      //height: MediaQuery.of(context).size.height,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,8 +26,7 @@ class VerticalHome extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Expanded(
-            child: Card(
+          Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -59,7 +56,7 @@ class VerticalHome extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    ElevatedButton(
+                    /*ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -74,12 +71,11 @@ class VerticalHome extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

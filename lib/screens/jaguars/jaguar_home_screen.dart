@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/components/post_banner.dart';
 import 'package:proyecto_final/components/jaguar_card.dart';
+import 'package:proyecto_final/components/post_banner.dart';
 import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/models/post.dart';
 import 'package:proyecto_final/screens/general/post_screen.dart';
@@ -11,16 +12,15 @@ import 'package:proyecto_final/screens/jaguars/jaguar_carousel_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_detail_screen.dart';
 
 class JaguarHomeScreen extends StatefulWidget {
-  JaguarHomeScreen(
-    {super.key,}
-  );
+  JaguarHomeScreen({
+    super.key,
+  });
 
   @override
   State<JaguarHomeScreen> createState() => _JaguarHomeScreenState();
 }
 
 class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,30 +49,35 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PostScreen(post: jaguarPost,)),
+                      MaterialPageRoute(
+                          builder: (context) => PostScreen(
+                                post: jaguarPost,
+                              )),
                     );
                   },
                   post: jaguarPost,
                 ),
-                SizedBox(height: 10,),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   '¡Jaguares Liberados!',
                   textAlign: TextAlign.start,
-                  style: GoogleFonts.getFont(
-                    'Roboto',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold
-                  )
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 JaguarCarouselScreen(
                   jaguars: jaguars,
                   onJaguarTap: (jaguar) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => JaguarDetailScreen(jaguar: jaguar),
+                        builder: (context) =>
+                            JaguarDetailScreen(jaguar: jaguar),
                       ),
                     );
                   },
@@ -83,16 +88,15 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   'Jaguares para Adoptar',
-                  style: GoogleFonts.getFont(
-                    'Roboto',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold
-                  )
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
               ],
             ),
           ),

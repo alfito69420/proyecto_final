@@ -55,10 +55,10 @@ class JaguarCarouselScreen extends StatelessWidget {
                             colors: [Colors.black.withOpacity(0.8), Colors.transparent],
                           ),
                         ),
-                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         child: Text(
                           jaguar.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
