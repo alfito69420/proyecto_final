@@ -56,6 +56,8 @@ dependencies:
   flutter_stripe: ^11.3.0
   firebase_messaging: ^15.1.5
   flutter_local_notifications: ^18.0.1
+  supabase_flutter: ^2.8.1
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:

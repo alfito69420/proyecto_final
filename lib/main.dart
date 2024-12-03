@@ -20,6 +20,7 @@ import 'package:proyecto_final/screens/profile/profile_screen.dart';
 import 'package:proyecto_final/screens/register_screen.dart';
 import 'package:proyecto_final/screens/services/preference_service.dart';
 import 'package:proyecto_final/utils/notifications.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'firebase_options.dart';
 
@@ -33,6 +34,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ); // Inicializa Firebaseotifi
+
+  // Inicialización de Firebase pueh pa
+  await Supabase.initialize(
+    url: 'https://jlbsjmdohyuyxycwpuin.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsYnNqbWRvaHl1eXh5Y3dwdWluIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIyNDg3MjAsImV4cCI6MjA0NzgyNDcyMH0.JCnR_0hsp6o3yyV-eJz6rfLwYmSco6AyCggD6i-idQg',
+  );
 
   await FirebaseApi().initNotifications();
   final PreferenceService _preferenceService = PreferenceService();
