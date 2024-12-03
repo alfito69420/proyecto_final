@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
               "/us": (context) => TeamScreen(),
               "/locationmap": (context) => MapLocation(),
               "/themes": (context) => ThemeScreen(),
-              "/planselect": (context) => PlanSelectionScreen(),
+              //"/planselect": (context) => PlanSelectionScreen(),
               "/profile": (context) => const ProfileScreen(),
               "/register": (context) => const RegisterScreen(),
             },

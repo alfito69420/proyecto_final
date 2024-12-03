@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/screens/pagos/payment_info_screen.dart';
 import 'package:proyecto_final/settings/theme_settings.dart';

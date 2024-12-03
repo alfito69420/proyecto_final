@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
@@ -58,12 +58,12 @@ class PaymentConfirmationScreen extends StatelessWidget {
                   ),
                   Text(
                     'Con esto, ayudas a que ${jaguar.name} tenga una vida más larga y feliz',
-                    style: GoogleFonts.roboto(
+/*                    style: GoogleFonts.roboto(
                       textStyle: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
                       ),
-                    ),
+                    ),*/
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 15),

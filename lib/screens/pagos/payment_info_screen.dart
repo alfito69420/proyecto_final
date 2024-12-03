@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/screens/pagos/payment_confirmation_screen.dart';
 import 'package:proyecto_final/screens/services/payment_service.dart';
