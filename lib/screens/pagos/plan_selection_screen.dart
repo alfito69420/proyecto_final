@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/screens/pagos/plan_details_screen.dart';
 import 'package:proyecto_final/settings/theme_settings.dart';
 
 class PlanSelectionScreen extends StatelessWidget {
-  const PlanSelectionScreen({Key? key}) : super(key: key);
+  PlanSelectionScreen({Key? key, required this.jaguar}) : super(key: key);
+
+  final Jaguar jaguar;
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +89,7 @@ class PlanSelectionScreen extends StatelessWidget {
           //       planDescription: description,
           //       planPrice: price,
           //       imgUrl: imgUrl,
+          //       jaguar: jaguar,
           //       planId: planId,
           //     ),
           //   ),
@@ -134,6 +138,7 @@ class PlanSelectionScreen extends StatelessWidget {
                             planDescription: description,
                             planPrice: price,
                             imgUrl: imgUrl,
+                            jaguar: jaguar,
                             planId: planId,
                           ),
                         ),
