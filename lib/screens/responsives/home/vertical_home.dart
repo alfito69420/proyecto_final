@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/screens/general/team_screen.dart';
 
 class VerticalHome extends StatelessWidget {
   const VerticalHome({super.key});
@@ -56,7 +57,7 @@ class VerticalHome extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    /*ElevatedButton(
+                    ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -71,7 +72,7 @@ class VerticalHome extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                    ),*/
+                    ),
                   ],
                 ),
               ),

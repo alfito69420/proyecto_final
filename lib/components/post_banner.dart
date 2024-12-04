@@ -51,24 +51,20 @@ class PostBanner extends StatelessWidget {
                 children: [
                   Text(
                     post.title,
-                    /*style: GoogleFonts.oswald(
-                      textStyle: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),*/
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                   SizedBox(height: 4),
                   Text(
                     post.jaguarName ?? post.subtitle,
-                    /*style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),*/
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),

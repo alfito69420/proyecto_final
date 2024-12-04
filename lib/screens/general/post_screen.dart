@@ -37,20 +37,18 @@ class PostScreen extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           post.jaguarName ?? post.title,
-          /*style: GoogleFonts.oswald(
-            textStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 22.0,
-              fontWeight: FontWeight.bold,
-              shadows: [
-                Shadow(
-                  blurRadius: 10.0,
-                  color: Colors.black,
-                  offset: Offset(5.0, 5.0),
-                ),
-              ],
-            ),
-          ),*/
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22.0,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                blurRadius: 10.0,
+                color: Colors.black,
+                offset: Offset(5.0, 5.0),
+              ),
+            ],
+          ),
         ),
         background: Stack(
           fit: StackFit.expand,
@@ -94,13 +92,11 @@ class PostScreen extends StatelessWidget {
           Text(
             post.jaguarName ?? post.title,
             textAlign: TextAlign.center,
-            /*style: GoogleFonts.oswald(
-              textStyle: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.orange.shade800,
-              ),
-            ),*/
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              color: Colors.orange.shade800,
+            ),
           ),
           SizedBox(height: 8),
           Container(
@@ -116,13 +112,11 @@ class PostScreen extends StatelessWidget {
           Text(
             post.subtitle,
             textAlign: TextAlign.center,
-            /*style: GoogleFonts.roboto(
-              textStyle: TextStyle(
-                fontSize: 18,
-                fontStyle: FontStyle.italic,
-                color: Colors.grey.shade700,
-              ),
-            ),*/
+            style: TextStyle(
+              fontSize: 18,
+              fontStyle: FontStyle.italic,
+              color: Colors.grey.shade700,
+            ),
           ),
         ],
       ),
@@ -137,23 +131,19 @@ class PostScreen extends StatelessWidget {
         children: [
           Text(
             'Acerca de ${post.jaguarName ?? "este jaguar"}',
-            /*style: GoogleFonts.oswald(
-              textStyle: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.orange.shade800,
-              ),
-            ),*/
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.orange.shade800,
+            ),
           ),
           SizedBox(height: 16),
           Text(
             post.body,
-            /*style: GoogleFonts.roboto(
-              textStyle: TextStyle(
-                fontSize: 16,
-                height: 1.5,
-              ),
-            ),*/
+            style: TextStyle(
+              fontSize: 16,
+              height: 1.5,
+            ),
           ),
         ],
       ),
@@ -181,13 +171,11 @@ class PostScreen extends StatelessWidget {
         children: [
           Text(
             'Datos Adicionales',
-            /*style: GoogleFonts.oswald(
-              textStyle: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.orange.shade800,
-              ),
-            ),*/
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.orange.shade800,
+            ),
           ),
           SizedBox(height: 8),
           ...post.additionalData!.map((data) => 
@@ -210,23 +198,19 @@ class PostScreen extends StatelessWidget {
         children: [
           Text(
             'Información Adicional',
-            /*style: GoogleFonts.oswald(
-              textStyle: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.orange.shade800,
-              ),
-            ),*/
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.orange.shade800,
+            ),
           ),
           SizedBox(height: 16),
           Text(
             post.body2!,
-            /*style: GoogleFonts.roboto(
-              textStyle: TextStyle(
-                fontSize: 16,
-                height: 1.5,
-              ),
-            ),*/
+            style: TextStyle(
+              fontSize: 16,
+              height: 1.5,
+            ),
           ),
         ],
       ),
@@ -256,12 +240,10 @@ class PostScreen extends StatelessWidget {
           Expanded(
             child: RichText(
               text: TextSpan(
-               /* style: GoogleFonts.roboto(
-                  textStyle: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black87,
-                  ),
-                ),*/
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87,
+                ),
                 children: [
                   TextSpan(
                     text: '$label: ',

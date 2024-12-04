@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:proyecto_final/models/caroussel_item.dart';
+import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
 import 'package:proyecto_final/screens/general/theme_screen.dart';
+import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/responsives/home/horizontal_home.dart';
 import 'package:proyecto_final/screens/responsives/home/vertical_home.dart';
@@ -15,6 +17,43 @@ class HomeScreen extends StatelessWidget {
     final currentWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Inicio'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.color_lens),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ThemeScreen()),
+              );
+            },
+            tooltip: 'Configuración de temas',
+          ),
+          IconButton(
+            icon: Icon(Icons.pets),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => JaguarHomeScreen()),
+              );
+            },
+            tooltip: 'Pantalla de jaguares',
+          ),
+          IconButton(
+            icon: Icon(Icons.favorite),
+            onPressed: () {
+              // Navigate to "Mis adopciones" screen
+              // Replace MyAdoptionsScreen() with the actual screen widget
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AdoptedJaguarsScreen(adoptedJaguars: [jaguars.first],)),
+              );
+            },
+            tooltip: 'Mis adopciones',
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

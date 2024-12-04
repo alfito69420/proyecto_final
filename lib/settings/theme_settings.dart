@@ -19,19 +19,45 @@ class ThemeSettings {
     );
   }
 
+  // static ThemeData customTheme({
+  //   required Color primaryColor,
+  //   required Color scaffoldBackgroundColor,
+  //   required String fontFamily,
+  //   required ThemeData baseTheme,
+  // }) {
+  //   return baseTheme.copyWith(
+  //     primaryColor: primaryColor,
+  //     scaffoldBackgroundColor: scaffoldBackgroundColor,
+  //     appBarTheme: AppBarTheme(color: scaffoldBackgroundColor),
+  //     /*textTheme: baseTheme.textTheme.apply(
+  //       fontFamily: GoogleFonts.getFont(fontFamily).fontFamily,
+  //     ),*/
+  //   );
+  // }
   static ThemeData customTheme({
     required Color primaryColor,
     required Color scaffoldBackgroundColor,
-    required String fontFamily,
+    required String fontFamily, // Recibe el nombre de la fuente.
     required ThemeData baseTheme,
   }) {
     return baseTheme.copyWith(
       primaryColor: primaryColor,
       scaffoldBackgroundColor: scaffoldBackgroundColor,
       appBarTheme: AppBarTheme(color: scaffoldBackgroundColor),
-      /*textTheme: baseTheme.textTheme.apply(
-        fontFamily: GoogleFonts.getFont(fontFamily).fontFamily,
-      ),*/
+      textTheme: baseTheme.textTheme.copyWith(
+        bodyLarge: baseTheme.textTheme.bodyLarge?.copyWith(fontFamily: fontFamily),
+        bodyMedium: baseTheme.textTheme.bodyMedium?.copyWith(fontFamily: fontFamily),
+        bodySmall: baseTheme.textTheme.bodySmall?.copyWith(fontFamily: fontFamily),
+        titleLarge: baseTheme.textTheme.titleLarge?.copyWith(fontFamily: fontFamily),
+        titleMedium: baseTheme.textTheme.titleMedium?.copyWith(fontFamily: fontFamily),
+        titleSmall: baseTheme.textTheme.titleSmall?.copyWith(fontFamily: fontFamily),
+        labelLarge: baseTheme.textTheme.labelLarge?.copyWith(fontFamily: fontFamily),
+        labelMedium: baseTheme.textTheme.labelMedium?.copyWith(fontFamily: fontFamily),
+        labelSmall: baseTheme.textTheme.labelSmall?.copyWith(fontFamily: fontFamily),
+        headlineLarge: baseTheme.textTheme.headlineLarge?.copyWith(fontFamily: fontFamily),
+        headlineMedium: baseTheme.textTheme.headlineMedium?.copyWith(fontFamily: fontFamily),
+        headlineSmall: baseTheme.textTheme.headlineSmall?.copyWith(fontFamily: fontFamily),
+      ),
     );
   }
 
