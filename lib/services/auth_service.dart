@@ -6,11 +6,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/onboarding/onboarding_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService {
   static final GoogleSignIn _googleSignIn = GoogleSignIn(); // <----
   RegExp emailRegExp =
-  RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+      RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
 
   //  LOGIN CON FACEBOOK
 
@@ -42,7 +43,13 @@ class AuthService {
       final githubAuthCredential =
           GithubAuthProvider.credential('${githubSignInResponse.accessToken}');
 
-      await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+      User user = userCredential.user!;
+
+      //await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+
+      // Agregar usuario a Firestore
+      await _addUserToFirestore(user);
 
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Login Exitoso.")));
@@ -66,7 +73,13 @@ class AuthService {
       idToken: gAuth.idToken,
     );
 
-    await FirebaseAuth.instance.signInWithCredential(credential);
+    //await FirebaseAuth.instance.signInWithCredential(credential);
+
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+    User user = userCredential.user!;
+
+    // Agregar usuario a Firestore
+    await _addUserToFirestore(user);
 
     Navigator.pushReplacement(
       context,
@@ -87,6 +100,12 @@ class AuthService {
 
           await FirebaseAuth.instance
               .createUserWithEmailAndPassword(email: email, password: password);
+
+          UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+          User user = userCredential.user!;
+
+          // Agregar usuario a Firestore
+          await _addUserToFirestore(user);
 
           await Future.delayed(const Duration(seconds: 1));
           Navigator.pushReplacement(
@@ -142,8 +161,14 @@ class AuthService {
         if (password.length >= 6) {
           print("contrasena valida");
 
+          UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+          User user = userCredential.user!;
+
           await FirebaseAuth.instance
               .signInWithEmailAndPassword(email: email, password: password);
+
+          // Agregar usuario a Firestore
+          await _addUserToFirestore(user);
 
           await Future.delayed(const Duration(seconds: 1));
           Navigator.pushReplacement(
@@ -187,6 +212,27 @@ class AuthService {
       );
     }
   }
+
+  Future<void> _addUserToFirestore(User user) async {
+    try {
+      // Referencia a la colección "usuarios" en Firestore
+      CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+      // Crear un nuevo documento en Firestore con el ID del usuario de Firebase
+      await users.doc(user.uid).set({
+        'uid': user.uid,
+        'email': user.email,
+        'name': user.displayName ?? 'Sin nombre',
+        'photoUrl': user.photoURL ?? '',
+        'createdAt': Timestamp.now(),
+      });
+
+      print("Usuario agregado a Firestore.");
+    } catch (e) {
+      print("Error al agregar el usuario a Firestore: $e");
+    }
+  }
+
 
   Future<void> signout({required BuildContext context}) async {
     try {
