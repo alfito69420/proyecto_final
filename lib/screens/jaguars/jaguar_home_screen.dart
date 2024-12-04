@@ -71,7 +71,10 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                JaguarCarouselScreen(
+
+                //  EN ESTE CARRUSEL SOLO SE MUESTRAN JAGUARES LIBERADOS
+
+                /*JaguarCarouselScreen(
                   jaguars: jaguars,
                   onJaguarTap: (jaguar) {
                     Navigator.push(
@@ -82,7 +85,7 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
                       ),
                     );
                   },
-                ),
+                ),*/
               ],
             ),
           ),
@@ -101,7 +104,11 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
               ],
             ),
           ),
-          SliverPadding(
+
+          //  AQUI SON LOS JAGUARES QUEW SE PUEDEN ADOPTAR, CUYO ESTADO SEA EN RECINTO
+
+
+          /*SliverPadding(
             padding: EdgeInsets.all(8),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -117,7 +124,7 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
                 childCount: jaguars.length,
               ),
             ),
-          ),
+          ),*/
         ],
       ),
     );

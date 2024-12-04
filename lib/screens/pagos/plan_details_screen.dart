@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/jaguar_firestore_model.dart';
 import 'package:proyecto_final/screens/pagos/payment_confirmation_screen.dart';
 import 'package:proyecto_final/screens/services/payment_service.dart';
 import 'package:proyecto_final/settings/theme_settings.dart';
@@ -13,7 +14,7 @@ class PlanDetailsScreen extends StatefulWidget {
   final String planDescription;
   final double planPrice;
   final String imgUrl;
-  final Jaguar jaguar;
+  final JaguarFirestoreModel jaguar;
   final int planId;
 
   const PlanDetailsScreen({
@@ -31,7 +32,7 @@ class PlanDetailsScreen extends StatefulWidget {
 }
 
 class _PlanDetailsScreenState extends State<PlanDetailsScreen> {
-  Future<void> _addJaguarToFirestore(Jaguar jaguar) async {
+  Future<void> _addJaguarToFirestore(JaguarFirestoreModel jaguar) async {
     final user = FirebaseAuth.instance.currentUser;
     try {
       // Referencia a la colección "usuarios" en Firestore
