@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:github_signin_promax/github_signin_promax.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,6 +15,67 @@ class AuthService {
       RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
 
   //  LOGIN CON FACEBOOK
+  Future<UserCredential> signInWithFacebook(BuildContext context) async {
+    try {
+      // Mostrar un Progress Bar mientras se realiza el inicio de sesión
+      progressBar(context, "Iniciando sesión con Facebook");
+
+      // Iniciar el flujo de inicio de sesión con Facebook
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+
+      // Verificar el estado del inicio de sesión
+      if (loginResult.status == LoginStatus.success) {
+        // Crear una credencial a partir del token de acceso
+        final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+        // Iniciar sesión en Firebase con la credencial de Facebook
+        UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+        User user = userCredential.user!;
+
+        // Agregar usuario a Firestore
+        await _addUserToFirestore(user);
+
+        // Cerrar el Progress Bar
+        Navigator.of(context).pop();
+
+        // Redirigir al usuario al Dashboard
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => const DashboardScreen(),
+          ),
+        );
+
+        return userCredential;
+      } else {
+        // Si el inicio de sesión falla
+        Navigator.of(context).pop(); // Cierra el Progress Bar
+        Fluttertoast.showToast(
+          msg: "Inicio de sesión cancelado o fallido.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.black54,
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+        throw Exception("Login failed");
+      }
+    } catch (e) {
+      // Manejar errores
+      Navigator.of(context).pop(); // Cierra el Progress Bar
+      Fluttertoast.showToast(
+        msg: "Error al iniciar sesión con Facebook: $e",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.SNACKBAR,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
+      throw e;
+    }
+  }
 
   //  LOGIN CON GITHUB
   githubLogin(BuildContext context) {
@@ -281,6 +343,8 @@ class AuthService {
     try {
       await FirebaseAuth.instance.signOut();
       await _googleSignIn.signOut();
+      // Cerrar sesión de Facebook
+      await FacebookAuth.instance.logOut();
 
       // Cerrar el Progress Bar
       Navigator.of(context).pop();
