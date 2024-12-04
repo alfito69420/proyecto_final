@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/jaguar_firestore_model.dart';
 import 'package:proyecto_final/screens/pagos/payment_confirmation_screen.dart';
-import 'package:proyecto_final/screens/pagos/payment_info_screen.dart';
 import 'package:proyecto_final/screens/services/payment_service.dart';
 import 'package:proyecto_final/settings/theme_settings.dart';
 
@@ -12,7 +14,7 @@ class PlanDetailsScreen extends StatefulWidget {
   final String planDescription;
   final double planPrice;
   final String imgUrl;
-  final Jaguar jaguar;
+  final JaguarFirestoreModel jaguar;
   final int planId;
 
   const PlanDetailsScreen({
@@ -30,25 +32,54 @@ class PlanDetailsScreen extends StatefulWidget {
 }
 
 class _PlanDetailsScreenState extends State<PlanDetailsScreen> {
+  Future<void> _addJaguarToFirestore(JaguarFirestoreModel jaguar) async {
+    final user = FirebaseAuth.instance.currentUser;
+    try {
+      // Referencia a la colección "usuarios" en Firestore
+      CollectionReference jaguares =
+          FirebaseFirestore.instance.collection('jaguares');
+
+      // Crear un nuevo documento en Firestore con el ID del usuario de Firebase
+      await jaguares.doc(jaguar.name).set({
+        'nombre': jaguar.name ?? 'Jaguar sin nombre',
+        'edad': jaguar.age,
+        'sexo': jaguar.sex,
+        'foto': jaguar.imageUrl,
+        'descripcion': jaguar.description,
+        'estatus': jaguar.status,
+        'adoptante': user?.uid
+      });
+
+      print("Usuario agregado a Firestore.");
+    } catch (e) {
+      print("Error al agregar el usuario a Firestore: $e");
+    }
+  }
+
   Future<void> makePayment(price) async {
     try {
       // 1. Solicitar el Payment Intent al backend
-      final paymentIntent = await PaymentService().fetchPaymentIntent(price); // Monto en centavos
+      final paymentIntent =
+          await PaymentService().fetchPaymentIntent(price); // Monto en centavos
       print('PAGO: ${paymentIntent['client_secret']}');
 
       // 2. Inicializar el pago en Flutter
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
-          paymentIntentClientSecret: paymentIntent['client_secret'],
-          merchantDisplayName: 'Jaguar App'
-        ),
+            paymentIntentClientSecret: paymentIntent['client_secret'],
+            merchantDisplayName: 'Jaguar App'),
       );
 
       // 3. Mostrar la hoja de pago
       await Stripe.instance.presentPaymentSheet();
 
       // 4. Confirmación
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Pago exitoso')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Pago exitoso')));
+
+      //jaguar
+      _addJaguarToFirestore(widget.jaguar);
+
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -87,7 +118,11 @@ class _PlanDetailsScreenState extends State<PlanDetailsScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Theme.of(context).scaffoldBackgroundColor, ThemeSettings.generateSimilarColorHSL(Theme.of(context).scaffoldBackgroundColor)],
+            colors: [
+              Theme.of(context).scaffoldBackgroundColor,
+              ThemeSettings.generateSimilarColorHSL(
+                  Theme.of(context).scaffoldBackgroundColor)
+            ],
           ),
         ),
         child: SingleChildScrollView(
@@ -132,7 +167,7 @@ class _PlanDetailsScreenState extends State<PlanDetailsScreen> {
                 Align(
                   alignment: Alignment.center,
                   child: ElevatedButton(
-                    onPressed: _submitPayment,//() {
+                    onPressed: _submitPayment, //() {
                     //   Navigator.push(
                     //     context,
                     //     MaterialPageRoute(
@@ -152,7 +187,8 @@ class _PlanDetailsScreenState extends State<PlanDetailsScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                     ),
                   ),
                 ),
@@ -211,38 +247,38 @@ class _PlanDetailsScreenState extends State<PlanDetailsScreen> {
         ),
         SizedBox(height: 16),
         ...features.map((feature) => Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.check_circle, color: Colors.green[300]),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    feature,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(20),
                 ),
-              ],
-            ),
-          ),
-        )),
+                child: Row(
+                  children: [
+                    Icon(Icons.check_circle, color: Colors.green[300]),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        feature,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )),
       ],
     );
   }
 
   void _submitPayment() async {
-    try{
-      await makePayment(widget.planPrice.round() * 100); // Se multiplica x 100 pq el Stripe así lo toma
+    try {
+      await makePayment(widget.planPrice.round() *
+          100); // Se multiplica x 100 pq el Stripe así lo toma
     } catch (e) {
       print('EXCEPTION $e');
     }
   }
 }
-

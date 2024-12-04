@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/jaguar_firestore_model.dart';
 import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
 import 'package:proyecto_final/settings/theme_settings.dart';
@@ -8,7 +9,7 @@ import 'package:proyecto_final/settings/theme_settings.dart';
 class PaymentConfirmationScreen extends StatelessWidget {
   final String planTitle;
   final double planPrice;
-  final Jaguar jaguar;
+  final JaguarFirestoreModel jaguar;
   final int planId;
 
   const PaymentConfirmationScreen({
@@ -71,7 +72,7 @@ class PaymentConfirmationScreen extends StatelessWidget {
                   SizedBox(height: 32),
                   ElevatedButton(
                     onPressed: () {
-                      List<Jaguar> misJaguares = [];
+                      List<JaguarFirestoreModel> misJaguares = [];
                       misJaguares.add(jaguar);
                       Navigator.of(context).pushAndRemoveUntil(
                         // MaterialPageRoute(builder: (context) => PlanSelectionScreen(jaguar: jaguar,)),

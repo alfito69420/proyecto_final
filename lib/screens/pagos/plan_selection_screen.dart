@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/jaguar_firestore_model.dart';
 import 'package:proyecto_final/screens/pagos/plan_details_screen.dart';
 import 'package:proyecto_final/settings/theme_settings.dart';
 
 class PlanSelectionScreen extends StatelessWidget {
   PlanSelectionScreen({Key? key, required this.jaguar}) : super(key: key);
 
-  final Jaguar jaguar;
+  final JaguarFirestoreModel jaguar;
 
   @override
   Widget build(BuildContext context) {

@@ -29,7 +29,7 @@ class PaymentService {
 
     try {
       final response = await dio.post(
-        'http://192.168.1.71:8080/create-payment-intent',
+        'http://192.168.42.88:8080/create-payment-intent',
         data: {'amount': amount, 'currency': 'mxn'},
       );
 

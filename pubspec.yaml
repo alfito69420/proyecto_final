@@ -56,8 +56,10 @@ dependencies:
   flutter_stripe: ^11.3.0
   firebase_messaging: ^15.1.5
   flutter_local_notifications: ^18.0.1
+  firebase_ui_firestore: ^1.7.0
   cached_network_image: ^3.3.1
   email_validator: ^3.0.0
+  flutter_facebook_auth: '^3.5.0'
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +91,7 @@ flutter:
      - assets/jaguars/autano1.jpg
      - assets/jaguars/balam1.jpg
      - assets/jaguars/sugar1.jpg
+     - assets/jaguars/shadow3.jpeg
      - assets/general/
   #   - images/a_dot_ham.jpeg
 

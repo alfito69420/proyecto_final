@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:proyecto_final/models/jaguar.dart';
 import 'package:proyecto_final/models/post.dart';
 import 'package:proyecto_final/screens/general/posts_list_screen.dart';
 import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
@@ -9,7 +8,6 @@ import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 import '../services/auth_service.dart';
 import 'home_screen.dart';
 import 'jaguars/jaguar_home_screen.dart';
-import 'login_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -30,25 +28,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final defaultColorScheme = Theme.of(context);
 
     return Scaffold(
-      key: _scaffoldKey,
-      // Asigna la clave al Scaffold
-      appBar: AppBar(
-        backgroundColor: defaultColorScheme.primaryColor,
-        leading: IconButton(
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer(); // Abre el drawer
-          },
-          icon: Icon(
-            Icons.menu,
-            color: defaultColorScheme.canvasColor,
+        key: _scaffoldKey,
+        // Asigna la clave al Scaffold
+        appBar: AppBar(
+          backgroundColor: defaultColorScheme.primaryColor,
+          leading: IconButton(
+            onPressed: () {
+              _scaffoldKey.currentState?.openDrawer(); // Abre el drawer
+            },
+            icon: Icon(
+              Icons.menu,
+              color: defaultColorScheme.canvasColor,
+            ),
           ),
-        ),
-        title: Text(
-          "Inicio",
-          style: TextStyle(),
-        ),
-        actions: [
-          /*GestureDetector(
+          title: Text(
+            "Inicio",
+            style: TextStyle(color: Colors.white),
+          ),
+          actions: [
+            /*GestureDetector(
             onTap: () {},
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
@@ -61,11 +59,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),*/
-        ],
-      ),
-      drawer: myDrawer(context),
-      body: Builder(builder: (context) => HomeScreen(),)
-    );
+          ],
+        ),
+        drawer: myDrawer(context),
+        body: Builder(
+          builder: (context) => HomeScreen(),
+        ));
   }
 
   Widget myDrawer(context) {
@@ -80,8 +79,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             currentAccountPicture: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: user?.photoURL != null
-                  ? Image.network(user!.photoURL!) // Foto de perfil desde Google
-                  : const Image(image: AssetImage("assets/pfp.jpg")), // Placeholder
+                  ? Image.network(
+                      user!.photoURL!) // Foto de perfil desde Google
+                  : const Image(
+                      image: AssetImage("assets/pfp.jpg")), // Placeholder
             ),
             accountName: Text(user?.displayName ?? "Nombre no disponible"),
             accountEmail: Text(user?.email ?? "Correo no disponible"),
@@ -98,7 +99,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AdoptedJaguarsScreen(adoptedJaguars: [jaguars.first],)),
+                MaterialPageRoute(
+                    builder: (context) => AdoptedJaguarsScreen(
+                          adoptedJaguars: [],
+                        )),
               );
             },
             title: const Text("Mis Adopciones"),
@@ -140,7 +144,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PostsListScreen(posts: posts,)),
+                MaterialPageRoute(
+                    builder: (context) => PostsListScreen(
+                          posts: posts,
+                        )),
               );
             },
             title: const Text("Noticias del Santuario"),
@@ -164,5 +171,4 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
-
 }

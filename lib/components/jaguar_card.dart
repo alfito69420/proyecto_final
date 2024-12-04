@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/jaguar_firestore_model.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_detail_screen.dart';
 
 class JaguarCard extends StatelessWidget {
-  final Jaguar jaguar;
+  final JaguarFirestoreModel jaguar;
 
   const JaguarCard({Key? key, required this.jaguar}) : super(key: key);
 
@@ -26,26 +26,24 @@ class JaguarCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: ClipRRect(
+            ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
                 child: Image.asset(
-                  jaguar.imageUrl,
+                  jaguar.imageUrl!,
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
               ),
-            ),
             Padding(
               padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    jaguar.name,
+                    jaguar.name!,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

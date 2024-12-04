@@ -1,11 +1,12 @@
 // lib/screens/jaguar_detail_screen.dart
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/jaguar_firestore_model.dart';
 
 import 'package:proyecto_final/screens/pagos/plan_selection_screen.dart';
 
 class JaguarDetailScreen extends StatelessWidget {
-  final Jaguar jaguar;
+  final JaguarFirestoreModel jaguar;
 
   const JaguarDetailScreen({Key? key, required this.jaguar}) : super(key: key);
 
@@ -19,7 +20,7 @@ class JaguarDetailScreen extends StatelessWidget {
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(jaguar.name,
+              title: Text(jaguar.name!,
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22.0,
@@ -36,7 +37,7 @@ class JaguarDetailScreen extends StatelessWidget {
               background: Hero(
                 tag: 'jaguar-${jaguar.name}',
                 child: Image.asset(
-                  jaguar.imageUrl,
+                  jaguar.imageUrl!,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -55,11 +56,11 @@ class JaguarDetailScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    jaguar.description,
+                    jaguar.description!,
                   ),
                   // Solo si no ha sido liberado (En refugio), puede adoptarse
-                  if(jaguar.status == 'Refugio') SizedBox(height: 24),
-                  if(jaguar.status == 'Refugio') _buildAdoptButton(context),
+                  if(jaguar.status == 'Recinto') SizedBox(height: 24),
+                  if(jaguar.status == 'Recinto') _buildAdoptButton(context),
                 ],
               ),
             ),
@@ -79,11 +80,11 @@ class JaguarDetailScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildInfoItem(Icons.cake, '${jaguar.age} años'),
-            _buildInfoItem(jaguar.sex == 'Macho' ? Icons.male : Icons.female, jaguar.sex),
+            _buildInfoItem(jaguar.sex == 'Macho' ? Icons.male : Icons.female, jaguar.sex!),
             _buildInfoItem(
               jaguar.status == 'Liberado'
               ? Icons.done 
-              : Icons.pending, jaguar.status
+              : Icons.pending, jaguar.status!
             ),
           ],
         ),
