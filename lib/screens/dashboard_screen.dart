@@ -1,6 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:proyecto_final/models/post.dart';
+import 'package:proyecto_final/screens/general/posts_list_screen.dart';
+import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 
-import 'login_screen.dart';
+import '../services/auth_service.dart';
+import 'home_screen.dart';
+import 'jaguars/jaguar_home_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -18,28 +25,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     //  TEMA PRINCIPAL
-    final defaultColorScheme = Theme.of(context).colorScheme;
+    final defaultColorScheme = Theme.of(context);
 
     return Scaffold(
-      key: _scaffoldKey,
-      // Asigna la clave al Scaffold
-      appBar: AppBar(
-        backgroundColor: defaultColorScheme.primary,
-        leading: IconButton(
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer(); // Abre el drawer
-          },
-          icon: Icon(
-            Icons.menu,
-            color: defaultColorScheme.onPrimary,
+        key: _scaffoldKey,
+        // Asigna la clave al Scaffold
+        appBar: AppBar(
+          backgroundColor: defaultColorScheme.primaryColor,
+          leading: IconButton(
+            onPressed: () {
+              _scaffoldKey.currentState?.openDrawer(); // Abre el drawer
+            },
+            icon: Icon(
+              Icons.menu,
+              color: defaultColorScheme.canvasColor,
+            ),
           ),
-        ),
-        title: Text(
-          "APP Bomberos",
-          style: TextStyle(color: defaultColorScheme.onPrimary),
-        ),
-        actions: [
-          /*GestureDetector(
+          title: Text(
+            "Inicio",
+            style: TextStyle(color: Colors.white),
+          ),
+          actions: [
+            /*GestureDetector(
             onTap: () {},
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
@@ -52,83 +59,111 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),*/
-        ],
-      ),
-      drawer: myDrawer(),
-      body: ListView.builder(
-        itemCount: 7,
-        itemBuilder: (BuildContext context, int index) {
-          return const Column(
-            children: [
-              ListTile(
-                leading: Icon(Icons.file_copy),
-                title: Text('Reporte'),
-                subtitle: Text('Reporte #'),
-                trailing: Icon(Icons.edit_note),
-              ),
-              Divider(
-                thickness: 0.5,
-                endIndent: 25,
-                indent: 25,
-              ),
-            ],
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: defaultColorScheme.primary,
-        onPressed: () {},
-        child: const Icon(Icons.add, color: Colors.white, size: 28),
-      ),
-    );
+          ],
+        ),
+        drawer: myDrawer(context),
+        body: Builder(
+          builder: (context) => HomeScreen(),
+        ));
   }
 
-  Widget myDrawer() {
+  Widget myDrawer(context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Drawer(
+      // shadowColor: Theme.of(context).primaryColor,
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
+            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
             currentAccountPicture: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                //child: selectedImage != null ? Image.file(selectedImage!) : const Image(image: AssetImage("assets/pfp.jpg"))),
-                child: const Image(image: AssetImage("assets/pfp.jpg"))),
-            accountName: const Text("sun&moon"),
-            accountEmail: const Text("zenwol@gmail.com"),
+              borderRadius: BorderRadius.circular(100),
+              child: user?.photoURL != null
+                  ? Image.network(
+                      user!.photoURL!) // Foto de perfil desde Google
+                  : const Image(
+                      image: AssetImage("assets/pfp.jpg")), // Placeholder
+            ),
+            accountName: Text(user?.displayName ?? "Nombre no disponible"),
+            accountEmail: Text(user?.email ?? "Correo no disponible"),
           ),
           ListTile(
             onTap: () {
-              //Navigator.pushNamed(context, "/movies");
+              Navigator.pushNamed(context, "/profile");
             },
             title: const Text("Perfil"),
-            //subtitle: const Text("lorem ipsum"),
             leading: const Icon(Icons.person),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
           ListTile(
             onTap: () {
-              //Navigator.pushNamed(context, "/preferences_drawer");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AdoptedJaguarsScreen(
+                          adoptedJaguars: [],
+                        )),
+              );
+            },
+            title: const Text("Mis Adopciones"),
+            subtitle: const Text("Mis Jaguares"),
+            leading: const Icon(Icons.pets),
+            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => JaguarHomeScreen()),
+              );
+            },
+            title: const Text("Jaguares"),
+            subtitle: const Text("Todos los Jaguares"),
+            leading: const FaIcon(FontAwesomeIcons.cat),
+            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, "/themes");
             },
             title: const Text("Preferencias"),
             subtitle: const Text("Tema / Fuente"),
             leading: const Icon(Icons.room_preferences),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
-          const Padding(
-              padding: EdgeInsets.all(8),
-              child: Divider(
-                height: 2,
-              )),
           ListTile(
             onTap: () {
-              /*print(
-                  "Custom theme enabled (logout): ${GlobalValues.customThemeEnabled.value}");*/
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  ModalRoute.withName("/login"));
+              Navigator.pushNamed(context, "/registerfill");
+            },
+            title: const Text("FormRegistro2"),
+            subtitle: const Text("._.XD"),
+            leading: const FaIcon(FontAwesomeIcons.user),
+            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PostsListScreen(
+                          posts: posts,
+                        )),
+              );
+            },
+            title: const Text("Noticias del Santuario"),
+            subtitle: const Text("Noticias"),
+            leading: const Icon(Icons.newspaper),
+            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(8),
+            child: Divider(height: 2),
+          ),
+          ListTile(
+            onTap: () {
+              AuthService().signout(context: context);
             },
             title: const Text("Cerrar Sesión"),
-            //subtitle: const Text("Tema / Fuente"),
             leading: const Icon(Icons.logout),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
