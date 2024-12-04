@@ -5,9 +5,12 @@ import 'package:github_signin_promax/github_signin_promax.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
+import 'package:proyecto_final/screens/onboarding/onboarding_screen.dart';
 
 class AuthService {
   static final GoogleSignIn _googleSignIn = GoogleSignIn(); // <----
+  RegExp emailRegExp =
+  RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
 
   //  LOGIN CON FACEBOOK
 
@@ -71,21 +74,45 @@ class AuthService {
     );
   }
 
-
   //  REGISTER CON EMAIL Y PASS
   Future<void> signup(
       {required String email,
       required String password,
       required BuildContext context}) async {
     try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+      if (emailRegExp.hasMatch(email)) {
+        print('Correo válido');
+        if (password.length >= 6) {
+          print("contrasena valida");
 
-      await Future.delayed(const Duration(seconds: 1));
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const DashboardScreen()));
+          await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(email: email, password: password);
+
+          await Future.delayed(const Duration(seconds: 1));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const OnboardingScreen()));
+        } else {
+          Fluttertoast.showToast(
+            msg: "Ingrese una contrasena de al menos 6 caracteres.",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            backgroundColor: Colors.black54,
+            textColor: Colors.white,
+            fontSize: 14.0,
+          );
+        }
+      } else {
+        Fluttertoast.showToast(
+          msg: "Ingrese un correo valido.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.black54,
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+      }
     } on FirebaseAuthException catch (e) {
       String message = '';
       if (e.code == 'weak-password') {
@@ -110,14 +137,39 @@ class AuthService {
       required String password,
       required BuildContext context}) async {
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      if (emailRegExp.hasMatch(email)) {
+        print('Correo válido');
+        if (password.length >= 6) {
+          print("contrasena valida");
 
-      await Future.delayed(const Duration(seconds: 1));
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const DashboardScreen()));
+          await FirebaseAuth.instance
+              .signInWithEmailAndPassword(email: email, password: password);
+
+          await Future.delayed(const Duration(seconds: 1));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const DashboardScreen()));
+        } else {
+          Fluttertoast.showToast(
+            msg: "Ingrese una contrasena de al menos 6 caracteres.",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            backgroundColor: Colors.black54,
+            textColor: Colors.white,
+            fontSize: 14.0,
+          );
+        }
+      } else {
+        Fluttertoast.showToast(
+          msg: "Ingrese un correo valido.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.black54,
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+      }
     } on FirebaseAuthException catch (e) {
       String message = '';
       if (e.code == 'user-not-found') {

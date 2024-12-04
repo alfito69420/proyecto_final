@@ -84,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         password: txtpWDController.text,
                         context: context);
 
-                    Navigator.pushNamed(context, "/onboarding");
+                    //Navigator.pushNamed(context, "/onboarding");
                   },
                   child: const Text(
                     "Registrar",
