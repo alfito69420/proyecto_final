@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:proyecto_final/models/caroussel_item.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/post.dart';
+import 'package:proyecto_final/screens/general/posts_list_screen.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
 import 'package:proyecto_final/screens/general/theme_screen.dart';
 import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
@@ -29,6 +31,16 @@ class HomeScreen extends StatelessWidget {
               );
             },
             tooltip: 'Configuración de temas',
+          ),
+          IconButton(
+            icon: Icon(Icons.newspaper),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PostsListScreen(posts: posts,)),
+              );
+            },
+            tooltip: 'Noticias del Santuario',
           ),
           IconButton(
             icon: Icon(Icons.pets),

@@ -1,4 +1,5 @@
 // lib/screens/post_screen.dart
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/models/post.dart';
 
@@ -53,10 +54,21 @@ class PostScreen extends StatelessWidget {
         background: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset(
-              post.imgUrl,
-              fit: BoxFit.cover,
-            ),
+            post.imgUrl.startsWith('http')
+            ? CachedNetworkImage(
+                imageUrl: post.imgUrl,
+                placeholder: (context, url) => CircularProgressIndicator(), // Marcador de posición
+                errorWidget: (context, url, error) => Icon(Icons.error),    // Widget en caso de error
+                fit: BoxFit.cover,
+              )
+            : Image.asset(
+                post.imgUrl,
+                fit: BoxFit.cover,
+              ),
+            // Image.asset(
+            //   post.imgUrl,
+            //   fit: BoxFit.cover,
+            // ),
             DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(

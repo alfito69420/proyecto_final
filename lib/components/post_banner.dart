@@ -1,6 +1,5 @@
-// lib/widgets/baby_jaguar_banner.dart
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-//import 'package:google_fonts/google_fonts.dart';
 import 'package:proyecto_final/models/post.dart';
 
 class PostBanner extends StatelessWidget {
@@ -36,12 +35,21 @@ class PostBanner extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(45),
-                child: Image.asset(
-                  post.imgUrl, // Asegúrate de tener esta imagen en tu proyecto
-                  width: 90,
-                  height: 90,
-                  fit: BoxFit.cover,
-                ),
+                child: post.imgUrl.startsWith('http') // Verifica si es una URL de internet
+                  ? CachedNetworkImage(
+                      imageUrl: post.imgUrl,
+                      placeholder: (context, url) => CircularProgressIndicator(), // Marcador de posición
+                      errorWidget: (context, url, error) => Icon(Icons.error),    // Widget en caso de error
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      post.imgUrl, // Es un asset local
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.cover,
+                    ),
               ),
             ),
             Expanded(
@@ -56,6 +64,8 @@ class PostBanner extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 4),
                   Text(
@@ -65,6 +75,8 @@ class PostBanner extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
