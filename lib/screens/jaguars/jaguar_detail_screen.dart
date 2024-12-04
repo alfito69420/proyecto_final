@@ -59,8 +59,8 @@ class JaguarDetailScreen extends StatelessWidget {
                     jaguar.description!,
                   ),
                   // Solo si no ha sido liberado (En refugio), puede adoptarse
-                  if(jaguar.status == 'Refugio') SizedBox(height: 24),
-                  if(jaguar.status == 'Refugio') _buildAdoptButton(context),
+                  if(jaguar.status == 'Recinto') SizedBox(height: 24),
+                  if(jaguar.status == 'Recinto') _buildAdoptButton(context),
                 ],
               ),
             ),

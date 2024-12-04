@@ -22,31 +22,7 @@ class FirestoreService {
         .snapshots(); // Retorna todos los documentos de Firebase
   }
 
-/*
-  // Método para obtener usuarios desde Firestore
-  Future<List<JaguarFirestoreModel>> getJaguares() async {
-    try {
-      final user = FirebaseAuth.instance.currentUser?.uid;
-
-      // Obtener los documentos de la colección 'users'
-      QuerySnapshot snapshot = await _firestore
-          .collection('jaguares')
-          .where('adoptante', isEqualTo: user)
-          .get();
-
-      // Convertir los documentos a una lista de objetos 'User'
-      List<JaguarFirestoreModel> users = snapshot.docs.map((doc) {
-        // Convertir el documento a un mapa
-        return JaguarFirestoreModel.fromFirestore(
-            doc.data() as Map<String, dynamic>);
-      }).toList();
-
-      print(users.first.name);
-
-      return users;
-    } catch (e) {
-      print("Error al obtener usuarios: $e");
-      return [];
-    }
-  }*/
+  Stream<QuerySnapshot<Map<String, dynamic>>> SELECT_JAGUARES_PARA_ADOPTAR() {
+    return firebaseFirestore.collection('jaguaresParaAdoptar').snapshots();
+  }
 }

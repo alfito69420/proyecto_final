@@ -9,6 +9,7 @@ import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_carousel_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_detail_screen.dart';
 
+import '../../components/jaguar_card.dart';
 import '../../models/jaguar_firestore_model.dart';
 import '../../services/firestore_service.dart';
 
@@ -145,6 +146,7 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
                           doc.data() as Map<String, dynamic>);
                     }).toList();
 
+                    //  EN ESTE CARRUSEL SOLO SE MUESTRAN JAGUARES LIBERADOS
                     return JaguarCarouselScreen(
                       jaguars: jaguars,
                       onJaguarTap: (jaguar) {
@@ -159,21 +161,6 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
                     );
                   },
                 ),
-
-                //  EN ESTE CARRUSEL SOLO SE MUESTRAN JAGUARES LIBERADOS
-                /*
-              JaguarCarouselScreen(
-                  jaguars: jaguars,
-                  onJaguarTap: (jaguar) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            JaguarDetailScreen(jaguar: firestoreService.SELECT(id)),
-                      ),
-                    );
-                  },
-                ),*/
               ],
             ),
           ),
@@ -195,7 +182,62 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
 
           //  AQUI SON LOS JAGUARES QUEW SE PUEDEN ADOPTAR, CUYO ESTADO SEA EN RECINTO
 
-          /*SliverPadding(
+
+
+          SliverPadding(
+            padding: EdgeInsets.all(8),
+            sliver: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: firestoreService!.SELECT_JAGUARES_PARA_ADOPTAR(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return SliverToBoxAdapter(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return SliverToBoxAdapter(
+                    child: Center(
+                      child: Text("Error: ${snapshot.error}"),
+                    ),
+                  );
+                } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return SliverToBoxAdapter(
+                    child: Center(
+                      child: Text(
+                        'No hay jaguares para liberar disponibles por el momento.',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ),
+                  );
+                }
+
+                // Mapeamos los documentos obtenidos
+                final jaguarDocs = snapshot.data!.docs;
+                final jaguars = jaguarDocs.map((doc) {
+                  return JaguarFirestoreModel.fromFirestore(doc.data());
+                }).toList();
+
+                return SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 0.7,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                      return JaguarCard(jaguar: jaguars[index]);
+                    },
+                    childCount: jaguars.length,
+                  ),
+                );
+              },
+            ),
+          ),
+
+
+/*          SliverPadding(
             padding: EdgeInsets.all(8),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -212,6 +254,9 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
               ),
             ),
           ),*/
+
+
+
         ],
       ),
     );
