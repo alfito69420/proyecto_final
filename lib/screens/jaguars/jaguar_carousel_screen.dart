@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/jaguar_firestore_model.dart';
 
 class JaguarCarouselScreen extends StatelessWidget {
-  final List<Jaguar> jaguars;
-  final Function(Jaguar) onJaguarTap;
+  //final List<JaguarFirestoreModel> jaguars;
+  final List<JaguarFirestoreModel> jaguars;
+  final Function(JaguarFirestoreModel) onJaguarTap;
 
   const JaguarCarouselScreen({
     Key? key,
@@ -39,7 +41,7 @@ class JaguarCarouselScreen extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        jaguar.imageUrl,
+                        jaguar.imageUrl!,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -57,7 +59,7 @@ class JaguarCarouselScreen extends StatelessWidget {
                         ),
                         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         child: Text(
-                          jaguar.name,
+                          jaguar.name!,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,

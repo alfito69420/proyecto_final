@@ -1,7 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import '../models/jaguar_firestore_model.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -16,6 +13,15 @@ class FirestoreService {
   Stream<QuerySnapshot> SELECT(String id) {
     return collectionReference!.where('adoptante', isEqualTo: id).snapshots();
   }
+
+  Stream<QuerySnapshot> SELECTALL() {
+    CollectionReference? collectionReference2;
+    collectionReference2 = firebaseFirestore.collection('jaguaresLibres');
+    print(collectionReference2.parameters.entries.first.value);
+    return collectionReference2!
+        .snapshots(); // Retorna todos los documentos de Firebase
+  }
+
 /*
   // Método para obtener usuarios desde Firestore
   Future<List<JaguarFirestoreModel>> getJaguares() async {
