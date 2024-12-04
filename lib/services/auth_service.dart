@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -6,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:proyecto_final/screens/dashboard_screen.dart';
 import 'package:proyecto_final/screens/login_screen.dart';
 import 'package:proyecto_final/screens/onboarding/onboarding_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService {
   static final GoogleSignIn _googleSignIn = GoogleSignIn(); // <----
@@ -43,7 +43,10 @@ class AuthService {
       final githubAuthCredential =
           GithubAuthProvider.credential('${githubSignInResponse.accessToken}');
 
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+      progressBar(context, "Iniciando sesion");
+
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithCredential(githubAuthCredential);
       User user = userCredential.user!;
 
       //await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
@@ -53,6 +56,9 @@ class AuthService {
 
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Login Exitoso.")));
+
+      // Cerrar el Progress Bar
+      Navigator.of(context).pop();
 
       Navigator.pushReplacement(
         context,
@@ -74,12 +80,17 @@ class AuthService {
     );
 
     //await FirebaseAuth.instance.signInWithCredential(credential);
+    progressBar(context, "Iniciando sesion");
 
-    UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
     User user = userCredential.user!;
 
     // Agregar usuario a Firestore
     await _addUserToFirestore(user);
+
+    // Cerrar el Progress Bar
+    Navigator.of(context).pop();
 
     Navigator.pushReplacement(
       context,
@@ -101,11 +112,17 @@ class AuthService {
           await FirebaseAuth.instance
               .createUserWithEmailAndPassword(email: email, password: password);
 
-          UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+          progressBar(context, "Iniciando sesion");
+
+          UserCredential userCredential = await FirebaseAuth.instance
+              .signInWithEmailAndPassword(email: email, password: password);
           User user = userCredential.user!;
 
           // Agregar usuario a Firestore
           await _addUserToFirestore(user);
+
+          // Cerrar el Progress Bar
+          Navigator.of(context).pop();
 
           await Future.delayed(const Duration(seconds: 1));
           Navigator.pushReplacement(
@@ -161,7 +178,10 @@ class AuthService {
         if (password.length >= 6) {
           print("contrasena valida");
 
-          UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+          progressBar(context, "Iniciando sesion");
+
+          UserCredential userCredential = await FirebaseAuth.instance
+              .signInWithEmailAndPassword(email: email, password: password);
           User user = userCredential.user!;
 
           await FirebaseAuth.instance
@@ -169,6 +189,9 @@ class AuthService {
 
           // Agregar usuario a Firestore
           await _addUserToFirestore(user);
+
+          // Cerrar el Progress Bar
+          Navigator.of(context).pop();
 
           await Future.delayed(const Duration(seconds: 1));
           Navigator.pushReplacement(
@@ -216,7 +239,8 @@ class AuthService {
   Future<void> _addUserToFirestore(User user) async {
     try {
       // Referencia a la colección "usuarios" en Firestore
-      CollectionReference users = FirebaseFirestore.instance.collection('users');
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
 
       // Crear un nuevo documento en Firestore con el ID del usuario de Firebase
       await users.doc(user.uid).set({
@@ -233,11 +257,33 @@ class AuthService {
     }
   }
 
+  progressBar(BuildContext context, String cadena) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      // No permite cerrar el diálogo tocando fuera de él
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 20),
+              Text(cadena),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   Future<void> signout({required BuildContext context}) async {
+    progressBar(context, "Cerrando sesion");
     try {
       await FirebaseAuth.instance.signOut();
       await _googleSignIn.signOut();
+
+      // Cerrar el Progress Bar
+      Navigator.of(context).pop();
 
       // Opcional: Mostrar un mensaje indicando que la sesión se ha cerrado
       ScaffoldMessenger.of(context).showSnackBar(
