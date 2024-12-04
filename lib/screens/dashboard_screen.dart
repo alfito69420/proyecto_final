@@ -1,5 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/post.dart';
+import 'package:proyecto_final/screens/general/posts_list_screen.dart';
+import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 
 import '../services/auth_service.dart';
 import 'home_screen.dart';
@@ -22,25 +27,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     //  TEMA PRINCIPAL
-    final defaultColorScheme = Theme.of(context).colorScheme;
+    final defaultColorScheme = Theme.of(context);
 
     return Scaffold(
       key: _scaffoldKey,
       // Asigna la clave al Scaffold
       appBar: AppBar(
-        backgroundColor: defaultColorScheme.primary,
+        backgroundColor: defaultColorScheme.primaryColor,
         leading: IconButton(
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer(); // Abre el drawer
           },
           icon: Icon(
             Icons.menu,
-            color: defaultColorScheme.onPrimary,
+            color: defaultColorScheme.canvasColor,
           ),
         ),
         title: Text(
-          "Jaguar",
-          style: TextStyle(color: defaultColorScheme.onPrimary),
+          "Inicio",
+          style: TextStyle(),
         ),
         actions: [
           /*GestureDetector(
@@ -58,18 +63,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),*/
         ],
       ),
-      drawer: myDrawer(),
+      drawer: myDrawer(context),
       body: Builder(builder: (context) => HomeScreen(),)
     );
   }
 
-  Widget myDrawer() {
+  Widget myDrawer(context) {
     final user = FirebaseAuth.instance.currentUser;
 
     return Drawer(
+      // shadowColor: Theme.of(context).primaryColor,
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
+            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
             currentAccountPicture: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: user?.photoURL != null
@@ -89,6 +96,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           ListTile(
             onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AdoptedJaguarsScreen(adoptedJaguars: [jaguars.first],)),
+              );
+            },
+            title: const Text("Mis Adopciones"),
+            subtitle: const Text("Mis Jaguares"),
+            leading: const Icon(Icons.pets),
+            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => JaguarHomeScreen()),
+              );
+            },
+            title: const Text("Jaguares"),
+            subtitle: const Text("Todos los Jaguares"),
+            leading: const FaIcon(FontAwesomeIcons.cat),
+            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+          ),
+          ListTile(
+            onTap: () {
               Navigator.pushNamed(context, "/themes");
             },
             title: const Text("Preferencias"),
@@ -98,11 +129,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           ListTile(
             onTap: () {
-              Navigator.pushNamed(context, "/us");
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PostsListScreen(posts: posts,)),
+              );
             },
-            title: const Text("Sobre nosotros"),
-            subtitle: const Text("Conócenos"),
-            leading: const Icon(Icons.people),
+            title: const Text("Noticias del Santuario"),
+            subtitle: const Text("Noticias"),
+            leading: const Icon(Icons.newspaper),
             trailing: const Icon(Icons.arrow_forward_ios_sharp),
           ),
           const Padding(

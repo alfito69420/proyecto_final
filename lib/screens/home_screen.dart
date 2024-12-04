@@ -19,53 +19,6 @@ class HomeScreen extends StatelessWidget {
     final currentWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Inicio'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.color_lens),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ThemeScreen()),
-              );
-            },
-            tooltip: 'Configuración de temas',
-          ),
-          IconButton(
-            icon: Icon(Icons.newspaper),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PostsListScreen(posts: posts,)),
-              );
-            },
-            tooltip: 'Noticias del Santuario',
-          ),
-          IconButton(
-            icon: Icon(Icons.pets),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => JaguarHomeScreen()),
-              );
-            },
-            tooltip: 'Pantalla de jaguares',
-          ),
-          IconButton(
-            icon: Icon(Icons.favorite),
-            onPressed: () {
-              // Navigate to "Mis adopciones" screen
-              // Replace MyAdoptionsScreen() with the actual screen widget
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AdoptedJaguarsScreen(adoptedJaguars: [jaguars.first],)),
-              );
-            },
-            tooltip: 'Mis adopciones',
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
