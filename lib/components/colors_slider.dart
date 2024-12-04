@@ -81,6 +81,9 @@ class _ColorsSliderState extends State<ColorsSlider> {
         ),
         child: Text(
           widget.buttonTxt ?? 'Color',
+          style: TextStyle(
+            fontFamily: widget.currentFont != null ? widget.currentFont! : 'Roboto',
+          ),
         ),
       ),
     );

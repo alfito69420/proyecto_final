@@ -32,7 +32,7 @@ class CustomThemeButtons extends StatefulWidget {
 }
 
 class _CustomThemeButtonsState extends State<CustomThemeButtons> {
-  final List<String> fonts = ['Roboto', 'Lobster', 'Poppins', 'Pacifico', 'Oswald'];
+  final List<String> fonts = ['Pacifico', 'Oswald', 'Raleway', 'Roboto', 'Protest'];
 
   @override
   Widget build(BuildContext context) {
@@ -51,22 +51,22 @@ class _CustomThemeButtonsState extends State<CustomThemeButtons> {
           children: [
             Text(
               'TEMAS',
-              /*style: GoogleFonts.getFont(
-                widget.currentFont != null ? widget.currentFont! : 'Roboto',
+              style: TextStyle(
+                fontFamily: widget.currentFont != null ? widget.currentFont! : 'Roboto',
                 fontSize: 35,
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).canvasColor
-              )*/
+              )
             ),
             SizedBox(height: 40,),
             Text(
               'GENÉRICOS',
-              /*style: GoogleFonts.getFont(
-                widget.currentFont != null ? widget.currentFont! : 'Roboto',
+              style: TextStyle(
+                fontFamily: widget.currentFont != null ? widget.currentFont! : 'Roboto',
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).canvasColor
-              )*/
+              )
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -121,12 +121,12 @@ class _CustomThemeButtonsState extends State<CustomThemeButtons> {
             SizedBox(height: 30,),
             Text(
               'PERSONALIZADO',
-              /*style: GoogleFonts.getFont(
-                widget.currentFont != null ? widget.currentFont! : 'Roboto',
+              style: TextStyle(
+                fontFamily: widget.currentFont != null ? widget.currentFont! : 'Roboto',
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).canvasColor
-              )*/
+              )
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -191,10 +191,10 @@ class _CustomThemeButtonsState extends State<CustomThemeButtons> {
                         child: Text(
                           'Aplicar',
                           textAlign: TextAlign.center,
-                          /*style: GoogleFonts.getFont(
-                            widget.currentFont != null ? widget.currentFont! : 'Roboto',
+                          style: TextStyle(
+                            fontFamily: widget.currentFont != null ? widget.currentFont! : 'Roboto',
                             fontWeight: FontWeight.bold,
-                          ),*/
+                          ),
                         ),
                         style: TextButton.styleFrom(
                           backgroundColor: widget.currentPrColor ?? Theme.of(context).primaryColor, // Color de fondo
@@ -234,10 +234,10 @@ class _CustomThemeButtonsState extends State<CustomThemeButtons> {
                   value: font,
                   child: Text(
                     font,
-                    /*style: GoogleFonts.getFont(
-                      font,
+                    style: TextStyle(
+                      fontFamily: font,
                       color: Theme.of(context).canvasColor
-                    ),*/ // Aplicar fuente de muestra
+                    ), // Aplicar fuente de muestra
                   ),
                 );
               }).toList(),

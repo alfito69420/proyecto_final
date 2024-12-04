@@ -58,12 +58,10 @@ class PaymentConfirmationScreen extends StatelessWidget {
                   ),
                   Text(
                     'Con esto, ayudas a que ${jaguar.name} tenga una vida más larga y feliz',
-/*                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),*/
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 15),

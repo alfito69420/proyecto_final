@@ -28,7 +28,7 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
         title: Text('Jaguares'),
         actions: [
           IconButton(
-            icon: FaIcon(FontAwesomeIcons.cat),
+            icon: Icon(Icons.pets),
             onPressed: () {
               Navigator.push(
                 context,
@@ -50,12 +50,13 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PostScreen(
-                                post: jaguarPost,
-                              )),
+                        builder: (context) => PostScreen(
+                          post: posts[0], // Post de mauricio
+                        )
+                      ),
                     );
                   },
-                  post: jaguarPost,
+                  post: posts[0],
                 ),
                 SizedBox(
                   height: 10,

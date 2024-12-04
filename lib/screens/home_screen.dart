@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:proyecto_final/models/caroussel_item.dart';
+import 'package:proyecto_final/models/jaguar.dart';
+import 'package:proyecto_final/models/post.dart';
+import 'package:proyecto_final/screens/general/posts_list_screen.dart';
 import 'package:proyecto_final/screens/general/team_screen.dart';
 import 'package:proyecto_final/screens/general/theme_screen.dart';
+import 'package:proyecto_final/screens/jaguars/adopted_jaguars_screen.dart';
 import 'package:proyecto_final/screens/jaguars/jaguar_home_screen.dart';
 import 'package:proyecto_final/screens/responsives/home/horizontal_home.dart';
 import 'package:proyecto_final/screens/responsives/home/vertical_home.dart';
