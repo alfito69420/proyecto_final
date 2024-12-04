@@ -17,7 +17,7 @@ class AdoptedJaguarsScreen extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.home),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/newhome');
+            Navigator.pushReplacementNamed(context, '/home');
           },
         ),
       ),
