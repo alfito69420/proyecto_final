@@ -28,7 +28,7 @@ class _JaguarHomeScreenState extends State<JaguarHomeScreen> {
         title: Text('Jaguares'),
         actions: [
           IconButton(
-            icon: FaIcon(FontAwesomeIcons.cat),
+            icon: Icon(Icons.pets),
             onPressed: () {
               Navigator.push(
                 context,
